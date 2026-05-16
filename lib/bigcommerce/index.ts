@@ -122,19 +122,12 @@ export async function bigCommerceFetch<T>({
       status: result.status,
       body
     };
-  } catch (e) {
+  } catch (e: any) {
     if (isVercelCommerceError(e)) {
-      throw {
-        status: e.status || 500,
-        message: e.message,
-        query
-      };
+      throw new Error(`BigCommerce API Error: ${e.message}`);
     }
 
-    throw {
-      error: e,
-      query
-    };
+    throw new Error(`BigCommerce Error: ${e?.message || String(e)} \nQuery: ${query}`);
   }
 }
 
@@ -301,7 +294,10 @@ export async function addToCart(
   return bigCommerceToVercelCart(bigCommerceCart, productsByIdList, checkout, checkoutUrl);
 }
 
-export async function removeFromCart(cartId: string, lineIds: string[]): Promise<VercelCart | undefined> {
+export async function removeFromCart(
+  cartId: string,
+  lineIds: string[]
+): Promise<VercelCart | undefined> {
   let cartState: { status: number; body: BigCommerceDeleteCartItemOperation };
   const removeCartItem = async (itemId: string) => {
     const res = await bigCommerceFetch<BigCommerceDeleteCartItemOperation>({
@@ -332,7 +328,7 @@ export async function removeFromCart(cartId: string, lineIds: string[]): Promise
 
   const cart = cartState!.body.data.cart.deleteCartLineItem.cart;
 
-  if (cart === null)  {
+  if (cart === null) {
     return undefined;
   }
 

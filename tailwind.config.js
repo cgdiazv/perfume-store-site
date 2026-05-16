@@ -5,6 +5,18 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        white: 'var(--color-white)',
+        black: 'var(--color-black)',
+        neutral: {
+          50: 'var(--color-neutral-50)',
+          100: 'var(--color-neutral-100)'
+        },
+        blue: {
+          500: 'var(--color-blue-500)',
+          600: 'var(--color-blue-600)'
+        }
+      },
       fontFamily: {
         sans: ['var(--font-inter)']
       },

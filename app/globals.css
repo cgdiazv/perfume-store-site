@@ -2,20 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  :root {
+    --color-white: #e2dacb;
+    --color-neutral-50: #e2dacb;
+    --color-neutral-100: #f5f1ea;
+
+    --color-blue-600: #a8845e;
+    --color-blue-500: #8d6d4a;
+
+    --color-black: #2f2f2f;
+
+    --easing-luxury: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
-@supports (font: -apple-system-body) and (-webkit-appearance: none) {
-  img[loading='lazy'] {
-    clip-path: inset(0.6px);
-  }
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: var(--color-white) !important;
+  color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-a,
-input,
-button {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+/* Custom Product Card Effects */
+.card-product {
+  @apply overflow-hidden rounded-3xl transition-all duration-500;
+  transition-timing-function: var(--easing-luxury);
+  background-color: var(--color-neutral-100);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.card-product:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  transform: translateY(-6px);
 }

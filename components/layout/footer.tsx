@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-import GitHubIcon from 'components/icons/github';
 import FooterMenu from 'components/layout/footer-menu';
-import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/bigcommerce';
 import { Suspense } from 'react';
 
@@ -17,10 +15,9 @@ export default async function Footer() {
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
-          <Link className="flex items-center gap-2 text-black dark:text-white md:pt-1" href="/">
-            <LogoSquare size="sm" />
+          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
         </div>
@@ -38,11 +35,6 @@ export default async function Footer() {
         >
           <FooterMenu menu={menu} />
         </Suspense>
-        <div className="md:ml-auto">
-          <a aria-label="Github Repository" href="https://github.com/bigcommerce/nextjs-commerce">
-            <GitHubIcon className="h-6" />
-          </a>
-        </div>
       </div>
       <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
@@ -51,8 +43,13 @@ export default async function Footer() {
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
           </p>
           <p className="md:ml-auto">
-            <a href="https://bigcommerce.com" className="text-black dark:text-white">
-              Crafted by BigCommerce
+            <a
+              href="https://indevasa.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-500 no-underline dark:text-neutral-400"
+            >
+              Indeva Websites
             </a>
           </p>
         </div>

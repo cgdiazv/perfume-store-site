@@ -1,0 +1,26 @@
+Color
+    -Body
+        -#E2DACB
+    -Text
+        -#DBD0BA light cream 
+        -#796040 mid brown
+        -#474747 Para
+
+    -Border
+        -#796040 outer
+        -#BFA583 inner
+    
+    -Button
+        -#C5B299 Body
+        -#ffffff text
+
+    -FAQ
+        -#F4ECDE body bg
+        -#171717 text
+
+Fonts   
+    -Headings 
+        -Darker Grotesque
+    -Body 
+        -Montserrat
+

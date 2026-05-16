@@ -1,3 +1,4 @@
+import Footer from 'components/layout/footer'; // 1. Imported the Footer
 import Navbar from 'components/layout/navbar';
 import { ensureStartsWith } from 'lib/utils';
 import { Inter } from 'next/font/google';
@@ -40,10 +41,18 @@ const inter = Inter({
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+      <body className="selection:bg-blue-500/30 flex min-h-screen flex-col bg-white text-black antialiased">
         <Navbar />
+
+        {/* Changed: main now natively clears space globally, but collapses to pt-0 when a transparent homepage navbar is detected */}
         <Suspense>
-          <main>{children}</main>
+          <main className="flex-grow pt-[72px] md:pt-[80px] [div[data-scrolled='false'][data-homepage='true']_\&]:!pt-0">
+            {children}
+          </main>
+        </Suspense>
+
+        <Suspense>
+          <Footer />
         </Suspense>
       </body>
     </html>

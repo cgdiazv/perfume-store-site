@@ -1,6 +1,4 @@
-import { Carousel } from 'components/carousel';
-import { ThreeItemGrid } from 'components/grid/three-items';
-import Footer from 'components/layout/footer';
+import { HeroBanner } from 'components/hero-banner'; // 1. Import your new Hero Component
 import { Suspense } from 'react';
 
 export const runtime = 'edge';
@@ -15,13 +13,8 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-      <ThreeItemGrid />
-      <Suspense>
-        <Carousel />
-        <Suspense>
-          <Footer />
-        </Suspense>
-      </Suspense>
+      <HeroBanner /> {/* 2. Placed seamlessly at the opening tier */}
+      <Suspense></Suspense>
     </>
   );
 }
