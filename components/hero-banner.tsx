@@ -20,8 +20,8 @@ export function HeroBanner() {
         <div className="flex max-w-2xl animate-fadeIn flex-col items-start gap-4">
           {/* Main Copy with Split Contrast Styling */}
           <h1 className="font-sans text-5xl font-black uppercase leading-[1.05] tracking-tight md:text-6xl">
-            <span className="text-neutral-100 drop-shadow-sm">Crafted</span>{' '}
-            <span className="mt-1 block text-blue-600">for Timeless Beauty</span>
+            <span className="text-neutral-100 drop-shadow-sm">Crafted for</span>{' '}
+            <span className="mt-1 block text-blue-600">Timeless Beauty</span>
           </h1>
 
           {/* Subtext from your asset */}

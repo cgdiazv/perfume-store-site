@@ -1,40 +1,91 @@
 import Link from 'next/link';
 
-import FooterMenu from 'components/layout/footer-menu';
-import { getMenu } from 'lib/bigcommerce';
-import { Suspense } from 'react';
-
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
-  const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700';
-  const menu = await getMenu('next-js-frontend-footer-menu');
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 border-t border-neutral-200 px-6 py-12 text-sm md:grid md:grid-cols-4 md:gap-8 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
-          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-            <span className="uppercase">{SITE_NAME}</span>
-          </Link>
+          <h3 className="mb-4 font-semibold text-black dark:text-white">Atlanta</h3>
+          <p className="mb-2">T: (+1) 404 555 1234</p>
+          <p>123 Peachtree Street,</p>
+          <p>Atlanta, GA 30303</p>
         </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-            </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
+        <div>
+          <h3 className="mb-4 font-semibold text-black dark:text-white">Buckhead</h3>
+          <p className="mb-2">T: (+1) 404 555 5678</p>
+          <p>3500 Peachtree Road,</p>
+          <p>Atlanta, GA 30326</p>
+        </div>
+        <div>
+          <h3 className="mb-4 font-semibold text-black dark:text-white">Quick Links</h3>
+          <ul className="flex flex-col gap-2">
+            <li>
+              <Link
+                href="/search"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/search"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/search"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Latest News
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="mb-4 font-semibold text-black dark:text-white">Follow Us</h3>
+          <ul className="flex flex-col gap-2">
+            <li>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Pinterest
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                YouTube
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">

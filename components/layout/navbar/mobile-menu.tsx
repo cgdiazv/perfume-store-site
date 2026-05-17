@@ -35,7 +35,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white md:hidden"
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-current transition-colors md:hidden dark:border-neutral-700 dark:text-white"
       >
         <Bars3Icon className="h-4" />
       </button>
@@ -50,7 +50,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
             leaveFrom="opacity-100 backdrop-blur-[.5px]"
             leaveTo="opacity-0 backdrop-blur-none"
           >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+            <div className="bg-black/30 fixed inset-0" aria-hidden="true" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}

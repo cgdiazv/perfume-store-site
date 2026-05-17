@@ -41,12 +41,12 @@ const inter = Inter({
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="selection:bg-blue-500/30 flex min-h-screen flex-col bg-white text-black antialiased">
+      <body className="selection:bg-blue-500/30 group flex min-h-screen flex-col bg-white text-black antialiased">
         <Navbar />
 
         {/* Changed: main now natively clears space globally, but collapses to pt-0 when a transparent homepage navbar is detected */}
         <Suspense>
-          <main className="flex-grow pt-[72px] md:pt-[80px] [div[data-scrolled='false'][data-homepage='true']_\&]:!pt-0">
+          <main className="flex-grow pt-[72px] group-has-[[data-homepage='true']]:!pt-0 md:pt-[80px]">
             {children}
           </main>
         </Suspense>
