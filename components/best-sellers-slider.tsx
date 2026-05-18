@@ -53,7 +53,7 @@ export default function BestSellersSlider({ products }: { products: VercelProduc
         {products.map((product, i) => (
           <li
             key={`${product.handle}${i}`}
-            className="relative aspect-square h-[40vh] max-h-[400px] w-2/3 max-w-[300px] flex-none snap-start md:w-1/3 lg:w-1/4"
+            className="relative aspect-square w-2/3 max-w-[300px] flex-none snap-start md:w-1/3 lg:w-1/4"
           >
             <Link href={`${product.handle}`} className="relative h-full w-full">
               <GridTileImage
