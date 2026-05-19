@@ -53,7 +53,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
             leaveFrom="opacity-100 backdrop-blur-[.5px]"
             leaveTo="opacity-0 backdrop-blur-none"
           >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+            <div className="bg-black/30 fixed inset-0" aria-hidden="true" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
@@ -64,7 +64,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl dark:border-neutral-700 dark:bg-black/80 dark:text-white md:w-[390px]">
+            <Dialog.Panel className="bg-white/80 dark:bg-black/80 fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:text-white">
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold">My Cart</p>
 
@@ -129,9 +129,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                   {item.merchandise.product.title}
                                 </span>
                                 {item.merchandise.title !== DEFAULT_OPTION ? (
-                                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                                    {item.merchandise.title}
-                                  </p>
+                                  <p className="text-sm text-[#46413b]">{item.merchandise.title}</p>
                                 ) : null}
                               </div>
                             </Link>
@@ -154,9 +152,9 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       );
                     })}
                   </ul>
-                  <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
+                  <div className="py-4 text-sm text-neutral-400 dark:text-neutral-300">
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
-                      <p>Taxes</p>
+                      <p className="text-sm text-[#46413b]">Taxes</p>
                       <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalTaxAmount.amount}
@@ -164,11 +162,11 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       />
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                      <p>Shipping</p>
-                      <p className="text-right">Calculated at checkout</p>
+                      <p className="text-sm text-[#46413b]">Shipping</p>
+                      <p className="text-right text-sm text-[#46413b]">Calculated at checkout</p>
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                      <p>Total</p>
+                      <p className="text-sm text-[#46413b]">Total</p>
                       <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalAmount.amount}
@@ -176,12 +174,13 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       />
                     </div>
                   </div>
-                  <a
-                    href={cart.checkoutUrl}
-                    className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                  <Link
+                    href={`/checkout?id=${cart.id}`}
+                    onClick={closeCart}
+                    className="block w-full rounded-full bg-[#a8845e] p-3 text-center text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#8d6d4c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8845e]"
                   >
                     Proceed to Checkout
-                  </a>
+                  </Link>
                 </div>
               )}
             </Dialog.Panel>

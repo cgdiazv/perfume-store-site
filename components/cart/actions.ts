@@ -93,3 +93,11 @@ export async function updateItemQuantity(
     return 'Error updating item quantity';
   }
 }
+
+export async function clearCart() {
+  const cartId = cookies().get('cartId')?.value;
+  if (cartId) {
+    cookies().delete('cartId');
+    revalidateTag(TAGS.cart);
+  }
+}
