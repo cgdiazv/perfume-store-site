@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -104,12 +105,12 @@ export function FAQs() {
               </p>
             </div>
             <div className="mt-6">
-              <a
+              <Link
                 href="/support"
                 className="inline-flex items-center justify-center rounded-full bg-[#a8845e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8d6d4c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8845e]"
               >
                 Contact Support
-              </a>
+              </Link>
             </div>
           </div>
         </div>
