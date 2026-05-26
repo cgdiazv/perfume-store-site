@@ -18,9 +18,9 @@ export default async function Footer() {
         </div>
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Buckhead</h3>
-          <p className="mb-2">T: (+1) 404 555 5678</p>
-          <p>3500 Peachtree Road,</p>
-          <p>Atlanta, GA 30326</p>
+          <p className="mb-2">T: (+1) 470 5450137</p>
+          <p>5271 A Buford Hwy NE,</p>
+          <p>Doraville, GA 30340</p>
         </div>
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Quick Links</h3>
