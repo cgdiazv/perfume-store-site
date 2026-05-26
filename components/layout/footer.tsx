@@ -12,9 +12,9 @@ export default async function Footer() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 border-t border-neutral-200 px-6 py-12 text-sm md:grid md:grid-cols-4 md:gap-8 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Atlanta</h3>
-          <p className="mb-2">T: (+1) 404 555 1234</p>
-          <p>123 Peachtree Street,</p>
-          <p>Atlanta, GA 30303</p>
+          <p className="mb-2">T: (+1) 770 674 5948</p>
+          <p>5740 Buford Hwy,</p>
+          <p>Doraville, GA 30340</p>
         </div>
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Buckhead</h3>
