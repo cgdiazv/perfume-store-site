@@ -12,9 +12,9 @@ module.exports = {
           50: 'var(--color-neutral-50)',
           100: 'var(--color-neutral-100)'
         },
-        blue: {
-          500: 'var(--color-blue-500)',
-          600: 'var(--color-blue-600)'
+        gold: {
+          500: 'var(--color-gold-500)',
+          600: 'var(--color-gold-600)'
         }
       },
       fontFamily: {

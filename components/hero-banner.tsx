@@ -20,8 +20,8 @@ export function HeroBanner() {
         <div className="flex max-w-2xl animate-fadeIn flex-col items-start gap-4">
           {/* Main Copy with Split Contrast Styling */}
           <h1 className="font-sans text-5xl font-black uppercase leading-[1.05] tracking-tight md:text-6xl">
-            <span className="text-neutral-100 drop-shadow-sm">Crafted for</span>{' '}
-            <span className="mt-1 block text-blue-600">Timeless Beauty</span>
+            <span className="text-white drop-shadow-sm">Crafted for</span>{' '}
+            <span className="mt-1 block text-white">Timeless Beauty</span>
           </h1>
 
           {/* Subtext from your asset */}
@@ -34,7 +34,7 @@ export function HeroBanner() {
           <div className="mt-4">
             <Link
               href="/search"
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-[1px] hover:bg-blue-500 hover:shadow-md active:translate-y-0"
+              className="inline-flex items-center justify-center rounded-full bg-gold-600 px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-[1px] hover:bg-gold-500 hover:shadow-md active:translate-y-0"
             >
               Shop the Collection
             </Link>

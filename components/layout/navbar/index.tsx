@@ -50,7 +50,7 @@ export default async function Navbar() {
                     {/* Changed color classes to transition dynamically */}
                     <Link
                       href={item.path}
-                      className="font-medium text-current no-underline opacity-85 transition-all duration-300 hover:opacity-100"
+                      className="font-medium text-current no-underline transition-all duration-300 hover:opacity-50"
                     >
                       {item.title}
                     </Link>

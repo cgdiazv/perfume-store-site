@@ -8,7 +8,7 @@ export default async function Footer() {
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
+    <footer className="bg-white text-sm text-neutral-500 dark:bg-white dark:text-neutral-500">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 border-t border-neutral-200 px-6 py-12 text-sm md:grid md:grid-cols-4 md:gap-8 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Atlanta</h3>

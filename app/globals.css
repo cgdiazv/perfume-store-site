@@ -4,12 +4,12 @@
 
 @layer base {
   :root {
-    --color-white: #e2dacb;
-    --color-neutral-50: #e2dacb;
-    --color-neutral-100: #f5f1ea;
+    --color-white: #ffffff;
+    --color-neutral-50: #f5f1ea;
+    --color-neutral-100: #e2dacb;
 
-    --color-blue-600: #a8845e;
-    --color-blue-500: #8d6d4a;
+    --color-gold-600: #a8845e;
+    --color-gold-500: #8d6d4a;
 
     --color-black: #2f2f2f;
 

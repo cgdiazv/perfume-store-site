@@ -36,7 +36,7 @@ export default function CheckoutMasterForm({ initialCheckoutId }: { initialCheck
       {/* Dynamic Processing Overlay (Replaces your XML loading_overlay) */}
       {loading && (
         <div className="bg-black/50 fixed inset-0 z-50 flex animate-fadeIn flex-col items-center justify-center text-white backdrop-blur-sm">
-          <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-neutral-300 border-t-blue-600" />
+          <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-neutral-300 border-t-gold-600" />
           <p className="text-lg font-semibold tracking-wide">Processing your transaction...</p>
         </div>
       )}

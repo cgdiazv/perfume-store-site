@@ -31,14 +31,14 @@ export default function BestSellersSlider({ products }: { products: VercelProduc
           <button
             onClick={scrollLeft}
             aria-label="Scroll left"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-gold-600 hover:text-gold-600"
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </button>
           <button
             onClick={scrollRight}
             aria-label="Scroll right"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-gold-600 hover:text-gold-600"
           >
             <ChevronRightIcon className="h-5 w-5" />
           </button>
