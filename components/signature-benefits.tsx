@@ -10,7 +10,7 @@ export function SignatureBenefits() {
   ];
 
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section className="bg-[rgba(164,133,94,0.06)] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Text Content */}
