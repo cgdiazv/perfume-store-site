@@ -497,57 +497,30 @@ export async function getCollectionProducts({
   return bigCommerceToVercelProducts(productList);
 }
 
-const TARGET_CATEGORIES = [
-  { matchSlug: 'men', title: 'Men', pathSlug: 'men' },
-  { matchSlug: 'women', title: 'Women', pathSlug: 'women' },
-  { matchSlug: 'kids', title: 'Kids', pathSlug: 'kids' },
-  { matchSlug: 'gift-sets-for-men', title: 'Gift Sets for Men', pathSlug: 'gift-sets-for-men' },
-  {
-    matchSlug: 'gift-sets-for-women',
-    title: 'Gift Sets for Women',
-    pathSlug: 'gift-sets-for-women'
-  },
-  { matchSlug: 'tester-for-men', title: 'Tester for Men', pathSlug: 'tester-for-men' },
-  { matchSlug: 'tester-for-women', title: 'Tester for Women', pathSlug: 'tester-for-women' }
-];
+const EXCLUDED_CATEGORY_SLUGS = ['for-men', 'for-women', 'unisex', 'wholesale'];
 
-const findCategoryMatch = (
-  categoryTree: BigCommerceCategoryTreeItem[],
-  target: (typeof TARGET_CATEGORIES)[number]
-) => {
-  return categoryTree.find((cat) => {
-    const catSlug = cat.path.split('/').filter(Boolean).pop()?.toLowerCase() || '';
-    const catName = cat.name.toLowerCase().trim();
-    const targetSlug = target.matchSlug.toLowerCase();
-    const targetTitle = target.title.toLowerCase();
+export function isAllowedCategory(category: BigCommerceCategoryTreeItem): boolean {
+  const slug = category.path.split('/').filter(Boolean).pop()?.toLowerCase() || '';
+  const name = category.name.toLowerCase().trim();
 
-    return (
-      catSlug === targetSlug ||
-      catName === targetSlug ||
-      catName === targetTitle ||
-      (targetSlug === 'kids' && (catSlug === 'children' || catName === 'children'))
-    );
-  });
-};
+  if (EXCLUDED_CATEGORY_SLUGS.includes(slug)) return false;
+  if (name === 'for men' || name === 'for women' || name === 'unisex' || name === 'wholesale')
+    return false;
+  return true;
+}
 
 export async function getTargetCategoryIds(): Promise<number[]> {
   try {
     const res = await bigCommerceFetch<BigCommerceMenuOperation>({
       query: getMenuQuery
     });
-    const categoryTree = res.body.data.site.categoryTree;
+    const categoryTree = res.body.data.site.categoryTree || [];
 
-    const ids: number[] = [];
-    for (const target of TARGET_CATEGORIES) {
-      const match = findCategoryMatch(categoryTree, target);
-      if (match) {
-        ids.push(match.entityId);
-      }
-    }
-    return ids.length ? ids : [37, 38, 39, 40, 41, 42, 43];
+    const allowed = categoryTree.filter(isAllowedCategory);
+    return allowed.map((c) => c.entityId);
   } catch (err) {
     console.error('Error fetching target category IDs:', err);
-    return [37, 38, 39, 40, 41, 42, 43];
+    return [37, 38, 39, 40, 41, 42, 43, 44];
   }
 }
 
@@ -556,24 +529,21 @@ export async function getCollections(): Promise<VercelCollection[]> {
     query: getMenuQuery
   });
 
-  const categoryTree = res.body.data.site.categoryTree;
+  const categoryTree = res.body.data.site.categoryTree || [];
+  const allowedCategories = categoryTree.filter(isAllowedCategory);
 
   const collections = await Promise.all(
-    TARGET_CATEGORIES.map(async (target) => {
-      const match = findCategoryMatch(categoryTree, target);
-
-      if (!match) return null;
-
+    allowedCategories.map(async (cat) => {
       const catRes = await bigCommerceFetch<BigCommerceCollectionOperation>({
         query: getCategoryQuery,
         variables: {
-          entityId: match.entityId
+          entityId: cat.entityId
         }
       });
 
       const vercelCollection = bigCommerceToVercelCollection(catRes.body.data.site.category);
       if (vercelCollection) {
-        vercelCollection.title = target.title;
+        vercelCollection.title = cat.name;
       }
       return vercelCollection;
     })
@@ -587,17 +557,13 @@ export async function getMenu(handle: string): Promise<VercelMenu[]> {
     const res = await bigCommerceFetch<BigCommerceMenuOperation>({
       query: getMenuQuery
     });
-    const categoryTree = res.body.data.site.categoryTree;
+    const categoryTree = res.body.data.site.categoryTree || [];
+    const allowedCategories = categoryTree.filter(isAllowedCategory);
 
-    return TARGET_CATEGORIES.map((target) => {
-      const match = findCategoryMatch(categoryTree, target);
-
-      const pathSlug = match
-        ? match.path.split('/').filter(Boolean).pop() ?? target.pathSlug
-        : target.pathSlug;
-
+    return allowedCategories.map((category) => {
+      const pathSlug = category.path.split('/').filter(Boolean).pop() ?? '';
       return {
-        title: target.title,
+        title: category.name,
         path: `/search/${pathSlug}`
       };
     });
