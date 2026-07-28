@@ -5,13 +5,14 @@
 @layer base {
   :root {
     --color-white: #ffffff;
-    --color-neutral-50: #f5f1ea;
-    --color-neutral-100: #e2dacb;
+    --color-neutral-50: #faf4f1;
+    --color-neutral-100: #f3e5e0;
 
-    --color-gold-600: #a8845e;
-    --color-gold-500: #8d6d4a;
+    --color-gold-600: #e2a693;
+    --color-gold-500: #c8816d;
+    --color-gold-400: #f2c7bb;
 
-    --color-black: #2f2f2f;
+    --color-black: #2b2524;
 
     --easing-luxury: cubic-bezier(0.22, 1, 0.36, 1);
   }

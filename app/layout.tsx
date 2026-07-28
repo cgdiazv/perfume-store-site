@@ -44,9 +44,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body className="selection:bg-gold-500/30 group flex min-h-screen flex-col bg-[#ffffff] text-black antialiased">
         <Navbar />
 
-        {/* Main content clears space for the fixed navbar globally */}
+        {/* Main content clears space for the fixed navbar with 0 extra gap */}
         <Suspense>
-          <main className="flex-grow pt-[72px] md:pt-[80px]">{children}</main>
+          <main className="flex-grow pt-[65px] md:pt-[68px]">{children}</main>
         </Suspense>
 
         <Suspense>

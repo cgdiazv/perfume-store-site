@@ -24,7 +24,6 @@ import { getCheckoutQuery } from './queries/checkout';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
-  getFeaturedProductsQuery,
   getNewestProductsQuery,
   getProductQuery,
   getProductsCollectionQuery,
@@ -101,7 +100,10 @@ export async function bigCommerceFetch<T>({
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${process.env.BIGCOMMERCE_CUSTOMER_IMPERSONATION_TOKEN}`,
+        Authorization: `Bearer ${
+          process.env.BIGCOMMERCE_CUSTOMER_IMPERSONATION_TOKEN ||
+          process.env.BIGCOMMERCE_STOREFRONT_TOKEN
+        }`,
         'Content-Type': 'application/json',
         ...headers
       },
@@ -135,10 +137,21 @@ const getCategoryEntityIdbyHandle = async (handle: string) => {
   const resp = await bigCommerceFetch<BigCommerceMenuOperation>({
     query: getMenuQuery
   });
+
   const recursiveFindCollectionId = (list: BigCommerceCategoryTreeItem[], slug: string): number => {
+    const cleanSlug = slug.toLowerCase().trim();
     const collectionId = list
       .flatMap((item): number | null => {
-        if (item.path.includes(slug!)) {
+        const itemSlug = item.path.split('/').filter(Boolean).pop()?.toLowerCase() || '';
+        const itemName = item.name.toLowerCase().trim();
+
+        const isExactMatch =
+          itemSlug === cleanSlug ||
+          itemName === cleanSlug ||
+          (cleanSlug === 'kids' && (itemSlug === 'children' || itemName === 'children')) ||
+          (cleanSlug === 'children' && (itemSlug === 'kids' || itemName === 'kids'));
+
+        if (isExactMatch) {
           return item.entityId;
         }
 
@@ -447,18 +460,18 @@ export async function getCollectionProducts({
   }
 
   if (expectedCollectionBreakpoints[collection] === 'featured_collection') {
-    const res = await bigCommerceFetch<BigCommerceFeaturedProductsOperation>({
-      query: getFeaturedProductsQuery,
+    const res = await bigCommerceFetch<BigCommerceNewestProductsOperation>({
+      query: getNewestProductsQuery,
       variables: {
         first: 10
       }
     });
 
-    if (!res.body.data.site.featuredProducts) {
+    if (!res.body.data.site.newestProducts) {
       console.log(`No collection found for \`${collection}\``);
       return [];
     }
-    const productList = res.body.data.site.featuredProducts.edges.map((item) => item.node);
+    const productList = res.body.data.site.newestProducts.edges.map((item) => item.node);
 
     return bigCommerceToVercelProducts(productList);
   }
@@ -469,7 +482,7 @@ export async function getCollectionProducts({
     query: getProductsCollectionQuery,
     variables: {
       entityId,
-      first: 10,
+      first: 50,
       hideOutOfStock: false,
       sortBy: sortBy === 'RELEVANCE' ? 'DEFAULT' : sortBy
     }
@@ -484,81 +497,111 @@ export async function getCollectionProducts({
   return bigCommerceToVercelProducts(productList);
 }
 
-export async function getCollections(): Promise<VercelCollection[]> {
-  const res = await bigCommerceFetch<BigCommerceCollectionsOperation>({
-    query: getStoreCategoriesQuery
+const TARGET_CATEGORIES = [
+  { matchSlug: 'men', title: 'Men', pathSlug: 'men' },
+  { matchSlug: 'women', title: 'Women', pathSlug: 'women' },
+  { matchSlug: 'kids', title: 'Kids', pathSlug: 'kids' },
+  { matchSlug: 'gift-sets-for-men', title: 'Gift Sets for Men', pathSlug: 'gift-sets-for-men' },
+  {
+    matchSlug: 'gift-sets-for-women',
+    title: 'Gift Sets for Women',
+    pathSlug: 'gift-sets-for-women'
+  },
+  { matchSlug: 'tester-for-men', title: 'Tester for Men', pathSlug: 'tester-for-men' },
+  { matchSlug: 'tester-for-women', title: 'Tester for Women', pathSlug: 'tester-for-women' }
+];
+
+const findCategoryMatch = (
+  categoryTree: BigCommerceCategoryTreeItem[],
+  target: (typeof TARGET_CATEGORIES)[number]
+) => {
+  return categoryTree.find((cat) => {
+    const catSlug = cat.path.split('/').filter(Boolean).pop()?.toLowerCase() || '';
+    const catName = cat.name.toLowerCase().trim();
+    const targetSlug = target.matchSlug.toLowerCase();
+    const targetTitle = target.title.toLowerCase();
+
+    return (
+      catSlug === targetSlug ||
+      catName === targetSlug ||
+      catName === targetTitle ||
+      (targetSlug === 'kids' && (catSlug === 'children' || catName === 'children'))
+    );
   });
-  const collectionIdList = res.body.data.site.categoryTree.map(({ entityId }) => entityId);
+};
+
+export async function getTargetCategoryIds(): Promise<number[]> {
+  try {
+    const res = await bigCommerceFetch<BigCommerceMenuOperation>({
+      query: getMenuQuery
+    });
+    const categoryTree = res.body.data.site.categoryTree;
+
+    const ids: number[] = [];
+    for (const target of TARGET_CATEGORIES) {
+      const match = findCategoryMatch(categoryTree, target);
+      if (match) {
+        ids.push(match.entityId);
+      }
+    }
+    return ids.length ? ids : [37, 38, 39, 40, 41, 42, 43];
+  } catch (err) {
+    console.error('Error fetching target category IDs:', err);
+    return [37, 38, 39, 40, 41, 42, 43];
+  }
+}
+
+export async function getCollections(): Promise<VercelCollection[]> {
+  const res = await bigCommerceFetch<BigCommerceMenuOperation>({
+    query: getMenuQuery
+  });
+
+  const categoryTree = res.body.data.site.categoryTree;
+
   const collections = await Promise.all(
-    collectionIdList.map(async (entityId) => {
-      const res = await bigCommerceFetch<BigCommerceCollectionOperation>({
+    TARGET_CATEGORIES.map(async (target) => {
+      const match = findCategoryMatch(categoryTree, target);
+
+      if (!match) return null;
+
+      const catRes = await bigCommerceFetch<BigCommerceCollectionOperation>({
         query: getCategoryQuery,
         variables: {
-          entityId
+          entityId: match.entityId
         }
       });
-      return bigCommerceToVercelCollection(res.body.data.site.category);
+
+      const vercelCollection = bigCommerceToVercelCollection(catRes.body.data.site.category);
+      if (vercelCollection) {
+        vercelCollection.title = target.title;
+      }
+      return vercelCollection;
     })
   );
 
-  return collections;
+  return collections.filter((c): c is VercelCollection => c !== null);
 }
 
 export async function getMenu(handle: string): Promise<VercelMenu[]> {
-  const configureMenuPath = (path: string) =>
-    path
-      .split('/')
-      .filter((item) => item.length)
-      .pop();
-  const createVercelCollectionPath = (title: string, menuType: 'footer' | 'header') =>
-    menuType === 'header' ? `/search/${title}` : `/${title}`;
-  const configureVercelMenu = (
-    menuData: BigCommerceCategoryTreeItem[] | BigCommercePage[],
-    isMenuData: boolean,
-    menuType?: 'footer' | 'header'
-  ): VercelMenu[] => {
-    if (isMenuData) {
-      return menuData
-        .flatMap((item) => {
-          let vercelMenuItem;
+  if (handle === 'next-js-frontend-header-menu') {
+    const res = await bigCommerceFetch<BigCommerceMenuOperation>({
+      query: getMenuQuery
+    });
+    const categoryTree = res.body.data.site.categoryTree;
 
-          if (menuType === 'header') {
-            const { name, path, hasChildren, children } = item as BigCommerceCategoryTreeItem;
-            const vercelTitle = configureMenuPath(path ?? '');
-            // NOTE: keep only high level categories for NavBar
-            // if (hasChildren && children) {
-            //   return configureVercelMenu(children, hasChildren);
-            // }
+    return TARGET_CATEGORIES.map((target) => {
+      const match = findCategoryMatch(categoryTree, target);
 
-            vercelMenuItem = {
-              title: name,
-              path: createVercelCollectionPath(vercelTitle!, menuType ?? 'header')
-            };
+      const pathSlug = match
+        ? match.path.split('/').filter(Boolean).pop() ?? target.pathSlug
+        : target.pathSlug;
 
-            return [vercelMenuItem];
-          }
-
-          if (menuType === 'footer') {
-            const { isVisibleInNavigation, name, path } = item as BigCommercePage;
-            const vercelTitle = configureMenuPath(path ?? '');
-
-            vercelMenuItem = {
-              title: name,
-              path: createVercelCollectionPath(vercelTitle!, menuType ?? 'footer')
-            };
-            // NOTE: blog has different structure & separate mapper
-            return vercelMenuItem.title === 'Blog' || !isVisibleInNavigation
-              ? []
-              : [vercelMenuItem];
-          }
-
-          return [];
-        })
-        .slice(0, 4);
-    }
-
-    return [];
-  };
+      return {
+        title: target.title,
+        path: `/search/${pathSlug}`
+      };
+    });
+  }
 
   if (handle === 'next-js-frontend-footer-menu') {
     const res = await bigCommerceFetch<BigCommercePagesOperation>({
@@ -566,15 +609,13 @@ export async function getMenu(handle: string): Promise<VercelMenu[]> {
     });
     const webPages = res.body.data.site.content.pages.edges.map((item) => item.node);
 
-    return configureVercelMenu(webPages, true, 'footer');
-  }
-
-  if (handle === 'next-js-frontend-header-menu') {
-    const res = await bigCommerceFetch<BigCommerceMenuOperation>({
-      query: getMenuQuery
-    });
-
-    return configureVercelMenu(res.body.data.site.categoryTree, true, 'header');
+    return webPages
+      .filter((page) => page.isVisibleInNavigation && page.name !== 'Blog')
+      .slice(0, 4)
+      .map((page) => ({
+        title: page.name,
+        path: `/${page.path.split('/').filter(Boolean).pop() ?? ''}`
+      }));
   }
 
   return [];
@@ -665,13 +706,17 @@ export async function getProducts({
   sortKey?: string;
 }): Promise<VercelProduct[]> {
   const sort = vercelToBigCommerceSorting(reverse ?? false, sortKey);
+  const targetCategoryIds = await getTargetCategoryIds();
+
   const res = await bigCommerceFetch<BigCommerceSearchProductsOperation>({
     query: searchProductsQuery,
     variables: {
       filters: {
-        searchTerm: query || ''
+        searchTerm: query || '',
+        categoryEntityIds: targetCategoryIds
       },
-      sort
+      sort,
+      first: 50
     }
   });
 

@@ -13,6 +13,7 @@ module.exports = {
           100: 'var(--color-neutral-100)'
         },
         gold: {
+          400: 'var(--color-gold-400)',
           500: 'var(--color-gold-500)',
           600: 'var(--color-gold-600)'
         }

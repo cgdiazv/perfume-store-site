@@ -186,7 +186,7 @@ export default function MethodStep({
                 key={method.id}
                 className={`flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-all ${
                   selectedMethodId === method.id
-                    ? 'border-[#a8845e] bg-[#a8845e]/5 ring-1 ring-[#a8845e]'
+                    ? 'border-[#e2a693] bg-[#e2a693]/5 ring-1 ring-[#e2a693]'
                     : 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-800'
                 }`}
               >
@@ -196,7 +196,7 @@ export default function MethodStep({
                     name="shipping_method"
                     checked={selectedMethodId === method.id}
                     onChange={() => setSelectedMethodId(method.id)}
-                    className="h-4 w-4 border-neutral-300 text-[#a8845e] focus:ring-[#a8845e]"
+                    className="h-4 w-4 border-neutral-300 text-[#e2a693] focus:ring-[#e2a693]"
                   />
                   <div className="text-sm">
                     <p className="font-bold text-black dark:text-white">{method.name}</p>
@@ -237,7 +237,7 @@ export default function MethodStep({
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#a8845e] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#8d6d4c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8845e]"
+            className="rounded-md bg-[#e2a693] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
           >
             Continue
           </button>

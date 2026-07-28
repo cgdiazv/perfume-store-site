@@ -49,11 +49,15 @@ export const getProductsCollectionQuery = /* GraphQL */ `
 `;
 
 export const searchProductsQuery = /* GraphQL */ `
-  query searchProducts($filters: SearchProductsFiltersInput!, $sort: SearchProductsSortInput) {
+  query searchProducts(
+    $filters: SearchProductsFiltersInput!
+    $sort: SearchProductsSortInput
+    $first: Int
+  ) {
     site {
       search {
         searchProducts(filters: $filters, sort: $sort) {
-          products {
+          products(first: $first) {
             edges {
               node {
                 ...product

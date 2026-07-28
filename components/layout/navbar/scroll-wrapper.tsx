@@ -21,13 +21,13 @@ export default function NavbarScrollWrapper({ children }: { children: ReactNode 
   }, []);
 
   return (
-    <div
+    <header
       data-scrolled={isScrolled}
-      className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-[#ffffff] text-black shadow-sm transition-all duration-500 ease-in-out"
+      className={`fixed left-0 right-0 top-0 z-50 border-b border-neutral-200 bg-white transition-all duration-300 dark:border-neutral-800 dark:bg-black ${
+        isScrolled ? 'py-2.5 shadow-sm' : 'py-3.5'
+      }`}
     >
-      <div className={`transition-all duration-500 ${isScrolled ? 'py-2' : 'py-4'}`}>
-        {children}
-      </div>
-    </div>
+      {children}
+    </header>
   );
 }

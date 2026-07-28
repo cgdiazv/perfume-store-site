@@ -10,7 +10,7 @@ export function SignatureBenefits() {
   ];
 
   return (
-    <section className="bg-[rgba(164,133,94,0.06)] py-16 sm:py-24">
+    <section className="bg-[#faf4f1] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Text Content */}
@@ -21,7 +21,7 @@ export function SignatureBenefits() {
             <ul className="space-y-6">
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-center">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black">
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#e2a693]">
                     <svg
                       className="h-5 w-5 text-white"
                       fill="none"
@@ -45,12 +45,12 @@ export function SignatureBenefits() {
 
           {/* Right Column - Image */}
           <div className="flex justify-center">
-            <div className="relative h-[250px] w-full max-w-md overflow-hidden rounded-2xl border border-[#8B4513] shadow-xl sm:h-[350px] lg:h-[450px]">
+            <div className="relative h-[300px] w-full max-w-md overflow-hidden rounded-3xl border border-[#e2a693]/30 shadow-2xl sm:h-[400px] lg:h-[500px]">
               <Image
-                src="/images/landing/background/man-holding-perfume-box.webp"
-                alt="Man holding perfume box"
+                src="/images/signature_benefits.png"
+                alt="Signature Benefits Craftsmanship"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center transition-transform duration-700 hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>

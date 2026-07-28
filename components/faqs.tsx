@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -35,24 +36,35 @@ export function FAQs() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-        {/* Left Column: Title & Subtitle */}
-        <div>
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+        {/* Left Column: Title, Subtitle, and Featured Image */}
+        <div className="flex flex-col">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">FAQs</h2>
           <p className="mt-4 text-lg text-gray-600">
             Everything you need to know about fragrances, shipping, and customer support.
           </p>
+
+          {/* Featured Image under FAQ subtext */}
+          <div className="relative mt-8 h-[320px] w-full overflow-hidden rounded-3xl border border-[#e2a693]/30 shadow-xl sm:h-[400px]">
+            <Image
+              src="/images/faq_man_perfume.png"
+              alt="Man holding luxury perfume bottle"
+              fill
+              className="object-cover object-center transition-transform duration-700 hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
         </div>
 
         {/* Right Column: Questions & Answers */}
-        <div>
+        <div className="flex flex-col justify-between">
           <dl className="space-y-4">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-gray-200 bg-[#f4ecde] p-6 shadow-sm"
+                  className="rounded-2xl border border-gray-200 bg-[#faf4f1] p-6 shadow-sm transition-all hover:border-[#e2a693]/40"
                 >
                   <dt>
                     <button
@@ -63,10 +75,10 @@ export function FAQs() {
                       <span className="ml-6 flex h-7 items-center">
                         {isOpen ? (
                           <svg
-                            className="h-6 w-6"
+                            className="h-6 w-6 text-[#e2a693]"
                             fill="none"
                             viewBox="0 0 24 24"
-                            strokeWidth="1.5"
+                            strokeWidth="2.5"
                             stroke="currentColor"
                             aria-hidden="true"
                           >
@@ -74,10 +86,10 @@ export function FAQs() {
                           </svg>
                         ) : (
                           <svg
-                            className="h-6 w-6"
+                            className="h-6 w-6 text-gray-400"
                             fill="none"
                             viewBox="0 0 24 24"
-                            strokeWidth="1.5"
+                            strokeWidth="2.5"
                             stroke="currentColor"
                             aria-hidden="true"
                           >
@@ -96,7 +108,7 @@ export function FAQs() {
           </dl>
 
           {/* Support Box */}
-          <div className="mt-12 rounded-2xl bg-[#f4ecde] p-8 sm:p-10">
+          <div className="mt-8 rounded-2xl border border-neutral-100 bg-[#faf4f1] p-8 sm:p-10">
             <div>
               <h3 className="text-lg font-semibold text-gray-900">Still have questions?</h3>
               <p className="mt-2 text-sm text-gray-600">
@@ -107,7 +119,7 @@ export function FAQs() {
             <div className="mt-6">
               <Link
                 href="/support"
-                className="inline-flex items-center justify-center rounded-full bg-[#a8845e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8d6d4c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8845e]"
+                className="inline-flex items-center justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
               >
                 Contact Support
               </Link>

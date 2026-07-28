@@ -158,7 +158,7 @@ export default function PaymentStep({
 
         {/* Terms and Conditions Acceptance Link Block */}
         <div className="space-y-2 pt-2">
-          <div className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#a8845e] hover:underline">
+          <div className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#e2a693] hover:underline">
             <span>Terms and Conditions</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +200,7 @@ export default function PaymentStep({
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#a8845e] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-sm transition-all hover:bg-[#8d6d4c] hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8845e]"
+            className="rounded-md bg-[#e2a693] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-sm transition-all hover:bg-[#c8816d] hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
           >
             Place Order
           </button>

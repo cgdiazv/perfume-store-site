@@ -95,7 +95,7 @@ export default function RegisterPage() {
                 required
                 value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function RegisterPage() {
                 required
                 value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function RegisterPage() {
               type="text"
               value={company}
               onChange={(event) => setCompany(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function RegisterPage() {
               type="tel"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function RegisterPage() {
                 required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function RegisterPage() {
                 required
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -218,7 +218,7 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full justify-center rounded-full bg-[#a8845e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8d6d4c] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#c8816d] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? 'Creating account...' : 'Create account'}
         </button>
@@ -226,7 +226,7 @@ export default function RegisterPage() {
 
       <p className="mt-6 text-center text-sm text-gray-600">
         Already have an account?{' '}
-        <Link href="/login" className="font-semibold text-[#a8845e] hover:opacity-80">
+        <Link href="/login" className="font-semibold text-[#e2a693] hover:opacity-80">
           Sign in
         </Link>
       </p>

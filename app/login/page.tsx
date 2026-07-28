@@ -62,7 +62,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -80,13 +80,13 @@ export default function LoginPage() {
               required
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#a8845e] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
             />
           </div>
           <div className="mt-2 text-right">
             <Link
               href="/forgot-password"
-              className="text-sm font-medium text-[#a8845e] hover:underline"
+              className="text-sm font-medium text-[#e2a693] hover:underline"
             >
               Forgot your password?
             </Link>
@@ -98,7 +98,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full justify-center rounded-full bg-[#a8845e] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8d6d4c] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#c8816d] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? 'Signing in...' : 'Sign in'}
         </button>
@@ -106,7 +106,7 @@ export default function LoginPage() {
 
       <p className="mt-6 text-center text-sm text-gray-600">
         New to Perfume Store?{' '}
-        <Link href="/register" className="font-semibold text-[#a8845e] hover:opacity-80">
+        <Link href="/register" className="font-semibold text-[#e2a693] hover:opacity-80">
           Create an account
         </Link>
       </p>
