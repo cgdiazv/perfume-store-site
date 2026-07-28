@@ -278,8 +278,10 @@ export type BigCommerceSearchProductsOperation = {
   variables: {
     filters: {
       searchTerm: string;
+      categoryEntityIds?: number[];
     };
-    sort: string | null;
+    sort?: string | null;
+    first?: number;
   };
 };
 
