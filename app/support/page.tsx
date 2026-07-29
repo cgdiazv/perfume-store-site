@@ -46,11 +46,11 @@ export default function SupportPage() {
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mb-10 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Contact Support
+          Contact Wholesale Support
         </h1>
         <p className="mt-4 text-lg text-gray-600">
-          We&apos;re here to help. Fill out the form below and we&apos;ll get back to you as soon as
-          possible.
+          We&apos;re here to support distributors and buyers with sourcing, orders, and account
+          questions.
         </p>
       </div>
 
@@ -58,7 +58,8 @@ export default function SupportPage() {
         <div className="rounded-2xl bg-[#f4ecde] p-8 text-center sm:p-10">
           <h3 className="text-xl font-semibold text-gray-900">Thank you for contacting us!</h3>
           <p className="mt-4 text-gray-600">
-            Your message has been received. Our support team will reach out to you shortly.
+            Your message has been received. Our wholesale support team will reach out to you
+            shortly.
           </p>
           <button
             onClick={() => setSubmitted(false)}

@@ -9,7 +9,7 @@ export const runtime = 'edge';
 
 export const metadata = {
   description:
-    'Discover luxury artisan perfumes, long-lasting body oils, and exclusive gift sets at Perfume Store Atlanta.',
+    'Discover wholesale fragrance distribution solutions with curated brand lines, dependable sourcing, and support for distributors and retailers.',
   openGraph: {
     type: 'website'
   }

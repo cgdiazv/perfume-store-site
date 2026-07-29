@@ -39,9 +39,12 @@ export default function LoginPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mb-10 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Sign in</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Wholesale sign in
+        </h1>
         <p className="mt-4 text-lg text-gray-600">
-          Access your account to manage orders, track shipments, and save your favorites.
+          Access your distributor account to manage orders, review inventory, and track wholesale
+          shipments.
         </p>
       </div>
 
@@ -105,7 +108,7 @@ export default function LoginPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-gray-600">
-        New to Perfume Store?{' '}
+        New to our wholesale program?{' '}
         <Link href="/register" className="font-semibold text-[#b42e31] hover:opacity-80">
           Create an account
         </Link>

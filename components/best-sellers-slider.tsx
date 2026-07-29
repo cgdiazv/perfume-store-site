@@ -31,7 +31,7 @@ export default function BestSellersSlider({
     <div className="w-full">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black">
-          Best Sellers
+          Featured Wholesale Brands
         </h2>
         <div className="flex gap-2">
           <button

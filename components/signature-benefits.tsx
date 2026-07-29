@@ -3,11 +3,11 @@ import Image from 'next/image';
 
 export async function SignatureBenefits() {
   const benefits = [
-    'Long-lasting aroma (8-12 hours)',
-    'High-grade Arabic fragrance oils',
-    'Rich imported essences',
-    'Deep bold projection',
-    'Premium handcrafted packaging'
+    'Reliable wholesale availability',
+    'Consistent inventory for repeat orders',
+    'Premium fragrance brands with strong margin potential',
+    'Flexible bulk ordering and replenishment support',
+    'Dedicated distributor account support'
   ];
 
   const products = await getCollectionProducts({ collection: 'hidden-homepage-featured-items' });
@@ -26,7 +26,7 @@ export async function SignatureBenefits() {
           {/* Left Column - Text Content */}
           <div className="flex flex-col justify-center">
             <h2 className="mb-8 text-3xl font-bold tracking-tight text-black sm:text-4xl">
-              Our Signature Benefits
+              Why Distributors Choose Us
             </h2>
             <ul className="space-y-6">
               {benefits.map((benefit, index) => (

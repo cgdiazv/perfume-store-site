@@ -7,32 +7,32 @@ import { useCallback, useEffect, useState } from 'react';
 const SLIDES = [
   {
     id: 1,
-    title: 'Timeless Scents',
-    highlight: 'Iconic Inspiration',
+    title: 'Wholesale Fragrance Lines',
+    highlight: 'Distribution Ready',
     subtitle:
-      'A clean, fresh blend of fragrance edits inspired by timeless classics from Chanel, Gucci, and Dior.',
-    ctaText: 'Shop Inspired Scents',
-    ctaLink: '/search/men',
+      'Curated fragrance brands and replenishment-friendly assortments for distributors, retailers, and buying groups.',
+    ctaText: 'Browse Wholesale Lines',
+    ctaLink: '/search',
     bgImage: '/images/landing/background/hero-image-1.webp'
   },
   {
     id: 2,
-    title: 'Sophisticated Blends',
-    highlight: 'Gift Curation',
+    title: 'Bulk Supply',
+    highlight: 'Volume Distribution',
     subtitle:
-      'Elegant daily and occasion picks inspired by the character of Paco Rabanne and Jean Paul Gaultier.',
-    ctaText: 'Explore Gift Sets',
-    ctaLink: '/search/gift-sets-for-men',
+      'Access dependable inventory, recurring replenishment, and wholesale-ready product selections for growing businesses.',
+    ctaText: 'Explore Distribution Catalog',
+    ctaLink: '/search',
     bgImage: '/images/landing/background/hero-image-2.webp'
   },
   {
     id: 3,
-    title: 'Everyday Luxury',
-    highlight: 'Fresh Signatures',
+    title: 'Flexible Ordering',
+    highlight: 'Reliable Fulfillment',
     subtitle:
-      'Balanced and airy blends inspired by enduring favorites, including the fresh style of Davidoff.',
-    ctaText: 'Discover Testers',
-    ctaLink: '/search/tester-for-men',
+      'Support your business with dependable sourcing, brand variety, and wholesale ordering for everyday distribution needs.',
+    ctaText: 'Request Wholesale Access',
+    ctaLink: '/support',
     bgImage: '/images/landing/background/hero-image-3.webp'
   }
 ];
@@ -83,19 +83,15 @@ export function HeroBanner() {
 
       {/* Hero Content Container */}
       <div className="relative z-20 mx-auto w-full max-w-7xl px-4 md:px-6 min-[1320px]:px-0">
-        <div className="max-w-2xl">
+        <div className="w-full max-w-3xl">
           {SLIDES.map((slide, index) => {
             if (index !== currentIndex) return null;
 
             return (
               <div
                 key={slide.id}
-                className="bg-white/85 flex animate-fadeIn flex-col items-start gap-5 rounded-3xl border border-[#e7e4dd] p-6 text-[#2e2a26] shadow-[0_20px_55px_rgba(80,64,36,0.10)] backdrop-blur-md sm:p-8 md:p-10"
+                className="bg-white/85 flex animate-fadeIn flex-col items-start gap-5 rounded-[32px] border border-[#e7e4dd] p-7 text-[#2e2a26] shadow-[0_20px_55px_rgba(80,64,36,0.10)] backdrop-blur-md sm:p-8 md:p-10 md:pr-14"
               >
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#ddd7ce] bg-[#f4f1eb] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#75695b]">
-                  Fragrance Inspiration
-                </span>
-
                 <h1 className="font-sans text-4xl font-semibold uppercase leading-[1.04] tracking-tight text-[#2e2a26] sm:text-5xl md:text-6xl">
                   <span>{slide.title}</span>{' '}
                   <span className="mt-1 block text-[#b42e31]">{slide.highlight}</span>
@@ -116,7 +112,7 @@ export function HeroBanner() {
                     href="/search"
                     className="bg-white/70 inline-flex items-center justify-center rounded-full border border-[#d6cfc6] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-[#2f2923] transition-all duration-300 hover:bg-white"
                   >
-                    View All Categories
+                    Explore Wholesale Catalog
                   </Link>
                 </div>
               </div>

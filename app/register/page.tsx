@@ -67,11 +67,11 @@ export default function RegisterPage() {
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mb-10 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Create an account
+          Create a wholesale account
         </h1>
         <p className="mt-4 text-lg text-gray-600">
-          Register a new customer account. All new accounts are created with the Retail customer
-          group.
+          Register for distributor access and unlock wholesale catalog viewing, account support, and
+          ordering tools.
         </p>
       </div>
 

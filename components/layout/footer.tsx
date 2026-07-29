@@ -30,15 +30,15 @@ export default async function Footer() {
                 href="/search"
                 className="transition-colors hover:text-black dark:hover:text-white"
               >
-                Products
+                Wholesale Catalog
               </Link>
             </li>
             <li>
               <Link
-                href="/search"
+                href="/support"
                 className="transition-colors hover:text-black dark:hover:text-white"
               >
-                Shop
+                Distributor Support
               </Link>
             </li>
           </ul>

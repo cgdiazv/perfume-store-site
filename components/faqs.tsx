@@ -13,24 +13,24 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
 
   const faqs = [
     {
-      question: 'How do I find my signature scent?',
+      question: 'How do I source fragrance brands for wholesale distribution?',
       answer:
-        'We recommend starting with our fragrance quiz or visiting our Atlanta store for a personalized consultation. Our experts will guide you through different scent families to find your perfect match.'
+        'We help distributors and resellers access curated fragrance brands with dependable supply, clear product information, and account support for bulk ordering.'
     },
     {
-      question: 'Can I return a perfume if I dont like it?',
+      question: 'Can I place recurring or volume orders?',
       answer:
-        "Yes! We offer a 30-day satisfaction guarantee. If you're not completely happy with your purchase, return the unused portion for a full refund or exchange."
+        'Yes. Our wholesale model is built for repeat purchasing, replenishment planning, and larger distribution needs across retail and reseller channels.'
     },
     {
-      question: 'Do you offer gift wrapping services?',
+      question: 'Do you support distributor account onboarding?',
       answer:
-        'Absolutely! We provide complimentary luxury gift wrapping with a personalized message card. Premium gift boxes are also available for an additional fee.'
+        'Absolutely. We provide wholesale account access, product guidance, and support to help new and growing distributors get started quickly.'
     },
     {
-      question: 'How long do perfumes typically last?',
+      question: 'How do you support business buyers?',
       answer:
-        'Our Eau de Parfum formulations typically last 6-8 hours, while our Parfum concentrations can last 8-12 hours. Oud-based fragrances often have even longer lasting power.'
+        'We focus on reliable product selection, consistent availability, and responsive support so your distribution operation runs smoothly.'
     }
   ];
 
@@ -41,7 +41,7 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
         <div className="flex flex-col">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">FAQs</h2>
           <p className="mt-4 text-lg text-gray-600">
-            Everything you need to know about fragrances, shipping, and customer support.
+            Everything you need to know about wholesale sourcing, ordering, and distributor support.
           </p>
 
           {/* Featured Image under FAQ subtext */}
@@ -112,8 +112,8 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
             <div>
               <h3 className="text-lg font-semibold text-gray-900">Still have questions?</h3>
               <p className="mt-2 text-sm text-gray-600">
-                Contact our support team and we will make sure everything is clear and intuitive for
-                you!
+                Contact our wholesale support team and we will help you with sourcing, orders, and
+                account questions.
               </p>
             </div>
             <div className="mt-6">

@@ -11,7 +11,7 @@ export default function Logo({ className = '' }: { className?: string }) {
         <span className="block leading-[0.88]">STORE</span>
       </span>
       <span className="-mt-0.5 pl-[0.32em] font-sans text-[8px] font-normal uppercase leading-none tracking-[0.32em] text-neutral-800 md:text-[9px] dark:text-neutral-200">
-        ATLANTA
+        WHOLESALE
       </span>
     </Link>
   );

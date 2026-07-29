@@ -3,7 +3,7 @@ import { isCustomerLoggedIn } from 'lib/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: 'Checkout | Premium Perfume Store',
+  title: 'Wholesale Checkout | Premium Perfume Distribution',
   robots: { index: false, follow: false } // Keep automated index bots out of secure processing pages
 };
 
@@ -29,7 +29,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             Secure Checkout
           </h1>
           <p className="mt-2 text-sm tracking-wide text-neutral-500">
-            Complete your order details below to finalize your luxury fragrance purchase.
+            Complete your wholesale order details below to finalize your distribution purchase.
           </p>
         </div>
 
