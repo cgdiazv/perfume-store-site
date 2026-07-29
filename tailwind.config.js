@@ -19,7 +19,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['var(--font-inter)']
+        sans: ['var(--font-montserrat)'],
+        serif: ['var(--font-cinzel)']
       },
       keyframes: {
         fadeIn: {

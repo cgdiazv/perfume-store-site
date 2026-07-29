@@ -1,7 +1,7 @@
 import Footer from 'components/layout/footer'; // 1. Imported the Footer
 import Navbar from 'components/layout/navbar';
 import { ensureStartsWith } from 'lib/utils';
-import { Inter } from 'next/font/google';
+import { Cinzel, Montserrat } from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
 
@@ -32,15 +32,23 @@ export const metadata = {
     })
 };
 
-const inter = Inter({
+const cinzel = Cinzel({
   subsets: ['latin'],
+  weight: ['400', '600', '700'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-cinzel'
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  display: 'swap',
+  variable: '--font-montserrat'
 });
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${cinzel.variable} ${montserrat.variable}`}>
       <body className="selection:bg-gold-500/30 group flex min-h-screen flex-col bg-[#ffffff] text-black antialiased">
         <Navbar />
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -72,7 +72,7 @@ export default function PaymentStep({
             id="credit_card"
             checked
             readOnly
-            className="h-4 w-4 text-[#BF9B30] focus:ring-[#BF9B30]"
+            className="h-4 w-4 text-[#b42e31] focus:ring-[#b42e31]"
           />
           <label
             htmlFor="credit_card"
@@ -158,7 +158,7 @@ export default function PaymentStep({
 
         {/* Terms and Conditions Acceptance Link Block */}
         <div className="space-y-2 pt-2">
-          <div className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#e2a693] hover:underline">
+          <div className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#b42e31] hover:underline">
             <span>Terms and Conditions</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +181,7 @@ export default function PaymentStep({
               type="checkbox"
               checked={agreedToTerms}
               onChange={(e) => setAgreedToTerms(e.target.checked)}
-              className="h-4 w-4 rounded border-neutral-300 text-[#BF9B30] focus:ring-[#BF9B30]"
+              className="h-4 w-4 rounded border-neutral-300 text-[#b42e31] focus:ring-[#b42e31]"
             />
             <span className="text-sm text-neutral-600 dark:text-neutral-400">
               Yes, I agree with the terms and conditions.
@@ -200,7 +200,7 @@ export default function PaymentStep({
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#e2a693] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-sm transition-all hover:bg-[#c8816d] hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
+            className="rounded-md bg-[#b42e31] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-sm transition-all hover:bg-[#8f2226] hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
           >
             Place Order
           </button>

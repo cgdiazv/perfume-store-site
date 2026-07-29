@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
@@ -201,7 +201,7 @@ export default function CartModal({
                   <Link
                     href={`/checkout?id=${cart.id}`}
                     onClick={closeCart}
-                    className="block w-full rounded-full bg-[#e2a693] p-3 text-center text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
+                    className="block w-full rounded-full bg-[#b42e31] p-3 text-center text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
                   >
                     Proceed to Checkout
                   </Link>

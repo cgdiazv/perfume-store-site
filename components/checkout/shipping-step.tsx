@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -101,7 +101,7 @@ export default function ShippingStep({
                   key={addr.id}
                   className={`flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-all ${
                     selectedAddressId === addr.id
-                      ? 'border-[#e2a693] bg-[#e2a693]/5 ring-1 ring-[#e2a693]'
+                      ? 'border-[#b42e31] bg-[#b42e31]/5 ring-1 ring-[#b42e31]'
                       : 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-800'
                   }`}
                 >
@@ -110,7 +110,7 @@ export default function ShippingStep({
                     name="saved_address"
                     checked={selectedAddressId === addr.id}
                     onChange={() => setSelectedAddressId(addr.id)}
-                    className="mt-1 h-4 w-4 border-neutral-300 text-[#e2a693] focus:ring-[#e2a693]"
+                    className="mt-1 h-4 w-4 border-neutral-300 text-[#b42e31] focus:ring-[#b42e31]"
                   />
                   <div className="space-y-0.5 text-sm text-neutral-600 dark:text-neutral-400">
                     <p className="font-bold text-black dark:text-white">
@@ -141,7 +141,7 @@ export default function ShippingStep({
               type="button"
               onClick={handleSelectSavedAddress}
               disabled={!selectedAddressId}
-              className="w-full rounded-md bg-[#e2a693] py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693] disabled:opacity-50 sm:w-1/2"
+              className="w-full rounded-md bg-[#b42e31] py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31] disabled:opacity-50 sm:w-1/2"
             >
               Continue
             </button>
@@ -272,7 +272,7 @@ export default function ShippingStep({
             </button>
             <button
               type="submit"
-              className="rounded-md bg-[#e2a693] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
+              className="rounded-md bg-[#b42e31] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
             >
               Save & Continue
             </button>

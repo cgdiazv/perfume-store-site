@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function FAQs() {
+export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
@@ -45,10 +45,10 @@ export function FAQs() {
           </p>
 
           {/* Featured Image under FAQ subtext */}
-          <div className="relative mt-8 h-[320px] w-full overflow-hidden rounded-3xl border border-[#e2a693]/30 shadow-xl sm:h-[400px]">
+          <div className="relative mt-8 h-[320px] w-full overflow-hidden rounded-3xl border border-[#b42e31]/30 shadow-xl sm:h-[400px]">
             <Image
-              src="/images/faq_man_perfume.png"
-              alt="Man holding luxury perfume bottle"
+              src={imageSrc || '/images/faq_man_perfume.png'}
+              alt={imageAlt || 'Man holding luxury perfume bottle'}
               fill
               className="object-cover object-center transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -64,7 +64,7 @@ export function FAQs() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-gray-200 bg-[#faf4f1] p-6 shadow-sm transition-all hover:border-[#e2a693]/40"
+                  className="rounded-2xl border border-gray-200 bg-[#faf4f1] p-6 shadow-sm transition-all hover:border-[#b42e31]/40"
                 >
                   <dt>
                     <button
@@ -75,7 +75,7 @@ export function FAQs() {
                       <span className="ml-6 flex h-7 items-center">
                         {isOpen ? (
                           <svg
-                            className="h-6 w-6 text-[#e2a693]"
+                            className="h-6 w-6 text-[#b42e31]"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth="2.5"
@@ -119,7 +119,7 @@ export function FAQs() {
             <div className="mt-6">
               <Link
                 href="/support"
-                className="inline-flex items-center justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
+                className="inline-flex items-center justify-center rounded-full bg-[#b42e31] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
               >
                 Contact Support
               </Link>

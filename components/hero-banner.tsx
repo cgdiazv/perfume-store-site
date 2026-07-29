@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -98,7 +98,7 @@ export function HeroBanner() {
 
                 <h1 className="font-sans text-4xl font-semibold uppercase leading-[1.04] tracking-tight text-[#2e2a26] sm:text-5xl md:text-6xl">
                   <span>{slide.title}</span>{' '}
-                  <span className="mt-1 block text-[#b67f66]">{slide.highlight}</span>
+                  <span className="mt-1 block text-[#b42e31]">{slide.highlight}</span>
                 </h1>
 
                 <p className="max-w-xl text-sm leading-relaxed text-[#4b433a] sm:text-base md:text-lg">
@@ -128,7 +128,7 @@ export function HeroBanner() {
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
-        className="bg-white/85 absolute left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b67f66] hover:text-[#b67f66] md:left-8"
+        className="bg-white/85 absolute left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] md:left-8"
       >
         <ChevronLeftIcon className="h-6 w-6" />
       </button>
@@ -136,7 +136,7 @@ export function HeroBanner() {
       <button
         onClick={nextSlide}
         aria-label="Next Slide"
-        className="bg-white/85 absolute right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b67f66] hover:text-[#b67f66] md:right-8"
+        className="bg-white/85 absolute right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] md:right-8"
       >
         <ChevronRightIcon className="h-6 w-6" />
       </button>
@@ -148,7 +148,7 @@ export function HeroBanner() {
             onClick={() => setCurrentIndex(i)}
             aria-label={`Go to slide ${i + 1}`}
             className={`h-2.5 rounded-full transition-all duration-500 ${
-              i === currentIndex ? 'w-8 bg-[#b67f66]' : 'w-2.5 bg-[#b9aea0] hover:bg-[#9f9384]'
+              i === currentIndex ? 'w-8 bg-[#b42e31]' : 'w-2.5 bg-[#b9aea0] hover:bg-[#9f9384]'
             }`}
           />
         ))}

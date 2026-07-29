@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -100,7 +100,7 @@ export default function MethodStep({
             type="checkbox"
             checked={formData.sameAsShipping}
             onChange={handleCheckboxChange}
-            className="h-4 w-4 rounded border-neutral-300 text-[#BF9B30] focus:ring-[#BF9B30]"
+            className="h-4 w-4 rounded border-neutral-300 text-[#b42e31] focus:ring-[#b42e31]"
           />
           <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
             My billing address is the same as my shipping address.
@@ -188,7 +188,7 @@ export default function MethodStep({
                 key={method.id}
                 className={`flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-all ${
                   selectedMethodId === method.id
-                    ? 'border-[#e2a693] bg-[#e2a693]/5 ring-1 ring-[#e2a693]'
+                    ? 'border-[#b42e31] bg-[#b42e31]/5 ring-1 ring-[#b42e31]'
                     : 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-800'
                 }`}
               >
@@ -198,7 +198,7 @@ export default function MethodStep({
                     name="shipping_method"
                     checked={selectedMethodId === method.id}
                     onChange={() => setSelectedMethodId(method.id)}
-                    className="h-4 w-4 border-neutral-300 text-[#e2a693] focus:ring-[#e2a693]"
+                    className="h-4 w-4 border-neutral-300 text-[#b42e31] focus:ring-[#b42e31]"
                   />
                   <div className="text-sm">
                     <p className="font-bold text-black dark:text-white">{method.name}</p>
@@ -234,7 +234,7 @@ export default function MethodStep({
             placeholder="(Optional) Add any specific delivery directions or notes..."
             value={formData.orderComments}
             onChange={(e) => setFormData((prev) => ({ ...prev, orderComments: e.target.value }))}
-            className="h-24 w-full resize-none rounded-md border bg-transparent p-3 text-sm text-black focus:outline-none focus:ring-1 focus:ring-[#BF9B30] dark:border-neutral-800 dark:text-white"
+            className="h-24 w-full resize-none rounded-md border bg-transparent p-3 text-sm text-black focus:outline-none focus:ring-1 focus:ring-[#b42e31] dark:border-neutral-800 dark:text-white"
           />
         </div>
 
@@ -249,7 +249,7 @@ export default function MethodStep({
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#e2a693] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693]"
+            className="rounded-md bg-[#b42e31] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
           >
             Continue
           </button>

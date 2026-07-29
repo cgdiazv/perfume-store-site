@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -62,7 +62,7 @@ export default function SupportPage() {
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#c8816d]"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-[#b42e31] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8f2226]"
           >
             Send another message
           </button>
@@ -80,7 +80,7 @@ export default function SupportPage() {
                 id="name"
                 autoComplete="name"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function SupportPage() {
                 id="email"
                 autoComplete="email"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function SupportPage() {
                 name="subject"
                 id="subject"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function SupportPage() {
                 id="message"
                 rows={4}
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#e2a693] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -142,7 +142,7 @@ export default function SupportPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full justify-center rounded-full bg-[#e2a693] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#c8816d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2a693] disabled:cursor-not-allowed disabled:opacity-70"
+              className="flex w-full justify-center rounded-full bg-[#b42e31] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? 'Sending...' : 'Submit'}
             </button>

@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -8,9 +8,9 @@
     --color-neutral-50: #faf4f1;
     --color-neutral-100: #f3e5e0;
 
-    --color-gold-600: #e2a693;
-    --color-gold-500: #c8816d;
-    --color-gold-400: #f2c7bb;
+    --color-gold-600: #b42e31;
+    --color-gold-500: #8f2226;
+    --color-gold-400: #d98a8c;
 
     --color-black: #2b2524;
 

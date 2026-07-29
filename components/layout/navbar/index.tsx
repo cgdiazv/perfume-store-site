@@ -1,14 +1,12 @@
-import Cart from 'components/cart';
+﻿import Cart from 'components/cart';
 import OpenCart from 'components/cart/open-cart';
+import Logo from 'components/logo';
 import { getMenu } from 'lib/bigcommerce';
 import { VercelMenu as Menu } from 'lib/bigcommerce/types';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import NavbarScrollWrapper from './scroll-wrapper';
-
-const { SITE_NAME } = process.env;
 
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
@@ -25,18 +23,7 @@ export default async function Navbar() {
         <div className="flex w-full items-center justify-between">
           {/* Left Side: Logo, Title, and Dynamic Links */}
           <div className="flex items-center gap-6">
-            <Link href="/" className="mr-2 flex items-center justify-center lg:mr-4">
-              <Image
-                src="/logo.webp"
-                alt="Store Logo"
-                width={40}
-                height={40}
-                className="h-[40px] w-[40px] rounded-xl object-contain"
-              />
-              <div className="ml-2 flex-none text-sm font-semibold uppercase tracking-wider text-current md:hidden lg:block">
-                {SITE_NAME}
-              </div>
-            </Link>
+            <Logo className="mr-2 lg:mr-4" />
 
             {menu.length ? (
               <ul className="hidden flex-wrap gap-4 text-sm md:flex md:items-center lg:gap-6">
@@ -65,7 +52,7 @@ export default async function Navbar() {
               </Link>
               <Link
                 href="/register"
-                className="rounded-full bg-[#e2a693] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#c8816d]"
+                className="rounded-full bg-[#b42e31] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#8f2226]"
               >
                 Create account
               </Link>

@@ -1,6 +1,7 @@
+﻿import { getCollectionProducts } from 'lib/bigcommerce';
 import Image from 'next/image';
 
-export function SignatureBenefits() {
+export async function SignatureBenefits() {
   const benefits = [
     'Long-lasting aroma (8-12 hours)',
     'High-grade Arabic fragrance oils',
@@ -8,6 +9,15 @@ export function SignatureBenefits() {
     'Deep bold projection',
     'Premium handcrafted packaging'
   ];
+
+  const products = await getCollectionProducts({ collection: 'hidden-homepage-featured-items' });
+  const productWithImage = products.find((product) => product.featuredImage?.url);
+
+  const imageSrc = productWithImage?.featuredImage?.url || '/images/signature_benefits.png';
+  const imageAlt =
+    productWithImage?.featuredImage?.altText ||
+    productWithImage?.title ||
+    'Featured perfume product';
 
   return (
     <section className="bg-[#faf4f1] py-16 sm:py-24">
@@ -21,7 +31,7 @@ export function SignatureBenefits() {
             <ul className="space-y-6">
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-center">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#e2a693]">
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#b42e31]">
                     <svg
                       className="h-5 w-5 text-white"
                       fill="none"
@@ -45,10 +55,10 @@ export function SignatureBenefits() {
 
           {/* Right Column - Image */}
           <div className="flex justify-center">
-            <div className="relative h-[300px] w-full max-w-md overflow-hidden rounded-3xl border border-[#e2a693]/30 shadow-2xl sm:h-[400px] lg:h-[500px]">
+            <div className="relative h-[300px] w-full max-w-md overflow-hidden rounded-3xl border border-[#b42e31]/30 shadow-2xl sm:h-[400px] lg:h-[500px]">
               <Image
-                src="/images/signature_benefits.png"
-                alt="Signature Benefits Craftsmanship"
+                src={imageSrc}
+                alt={imageAlt}
                 fill
                 className="object-cover object-center transition-transform duration-700 hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
