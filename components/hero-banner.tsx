@@ -13,7 +13,7 @@ const SLIDES = [
       'A clean, fresh blend of fragrance edits inspired by timeless classics from Chanel, Gucci, and Dior.',
     ctaText: 'Shop Inspired Scents',
     ctaLink: '/search/men',
-    bgImage: '/images/landing/background/1.webp'
+    bgImage: '/images/landing/background/hero-image-1.webp'
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const SLIDES = [
       'Elegant daily and occasion picks inspired by the character of Paco Rabanne and Jean Paul Gaultier.',
     ctaText: 'Explore Gift Sets',
     ctaLink: '/search/gift-sets-for-men',
-    bgImage: '/images/landing/background/2.webp'
+    bgImage: '/images/landing/background/hero-image-2.webp'
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const SLIDES = [
       'Balanced and airy blends inspired by enduring favorites, including the fresh style of Davidoff.',
     ctaText: 'Discover Testers',
     ctaLink: '/search/tester-for-men',
-    bgImage: '/images/landing/background/3.webp'
+    bgImage: '/images/landing/background/hero-image-3.webp'
   }
 ];
 

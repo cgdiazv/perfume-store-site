@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import Price from './price';
 
 const Label = ({
@@ -31,12 +30,7 @@ const Label = ({
             currencyCodeClassName="hidden @[275px]/label:inline"
           />
         ) : (
-          <Link
-            href="/login"
-            className="hover:bg-gold-700 flex-none rounded-full bg-gold-600 p-2 text-white"
-          >
-            Sign in to view
-          </Link>
+          <span className="flex-none rounded-full bg-gold-600 p-2 text-white">Sign in to view</span>
         )}
       </div>
     </div>
