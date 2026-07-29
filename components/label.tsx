@@ -1,15 +1,18 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import Price from './price';
 
 const Label = ({
   title,
   amount,
   currencyCode,
+  showPrice = true,
   position = 'bottom'
 }: {
   title: string;
-  amount: string;
-  currencyCode: string;
+  amount?: string;
+  currencyCode?: string;
+  showPrice?: boolean;
   position?: 'bottom' | 'center';
 }) => {
   return (
@@ -20,12 +23,21 @@ const Label = ({
     >
       <div className="bg-white/70 dark:bg-black/70 flex items-center rounded-full border p-1 text-xs font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:text-white">
         <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">{title}</h3>
-        <Price
-          className="flex-none rounded-full bg-gold-600 p-2 text-white"
-          amount={amount}
-          currencyCode={currencyCode}
-          currencyCodeClassName="hidden @[275px]/label:inline"
-        />
+        {showPrice && amount && currencyCode ? (
+          <Price
+            className="flex-none rounded-full bg-gold-600 p-2 text-white"
+            amount={amount}
+            currencyCode={currencyCode}
+            currencyCodeClassName="hidden @[275px]/label:inline"
+          />
+        ) : (
+          <Link
+            href="/login"
+            className="hover:bg-gold-700 flex-none rounded-full bg-gold-600 p-2 text-white"
+          >
+            Sign in to view
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -41,14 +41,6 @@ export default async function Footer() {
                 Shop
               </Link>
             </li>
-            <li>
-              <Link
-                href="/search"
-                className="transition-colors hover:text-black dark:hover:text-white"
-              >
-                Latest News
-              </Link>
-            </li>
           </ul>
         </div>
         <div>

@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { GridTileImage } from 'components/grid/tile';
-import Footer from 'components/layout/footer';
 import { Gallery } from 'components/product/gallery';
 import { ProductDescription } from 'components/product/product-description';
+import { isCustomerLoggedIn } from 'lib/auth';
 import { getProduct, getProductRecommendations } from 'lib/bigcommerce';
 import { Image } from 'lib/bigcommerce/types';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
@@ -53,6 +53,7 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
+  const showPrices = isCustomerLoggedIn();
 
   if (!product) return notFound();
 
@@ -67,9 +68,13 @@ export default async function ProductPage({ params }: { params: { handle: string
       availability: product.availableForSale
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
-      highPrice: product.priceRange.maxVariantPrice.amount,
-      lowPrice: product.priceRange.minVariantPrice.amount
+      ...(showPrices
+        ? {
+            priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+            highPrice: product.priceRange.maxVariantPrice.amount,
+            lowPrice: product.priceRange.minVariantPrice.amount
+          }
+        : {})
     }
   };
 
@@ -82,7 +87,7 @@ export default async function ProductPage({ params }: { params: { handle: string
         }}
       />
       <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
+        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
           <div className="h-full w-full basis-full lg:basis-4/6">
             <Gallery
               images={product.images.map((image: Image) => ({
@@ -93,21 +98,18 @@ export default async function ProductPage({ params }: { params: { handle: string
           </div>
 
           <div className="basis-full lg:basis-2/6">
-            <ProductDescription product={product} />
+            <ProductDescription product={product} showPrices={showPrices} />
           </div>
         </div>
         <Suspense>
-          <RelatedProducts id={product.id} />
+          <RelatedProducts id={product.id} showPrices={showPrices} />
         </Suspense>
       </div>
-      <Suspense>
-        <Footer />
-      </Suspense>
     </>
   );
 }
 
-async function RelatedProducts({ id }: { id: string }) {
+async function RelatedProducts({ id, showPrices }: { id: string; showPrices: boolean }) {
   const relatedProducts = await getProductRecommendations(id);
 
   if (!relatedProducts.length) return null;
@@ -126,8 +128,9 @@ async function RelatedProducts({ id }: { id: string }) {
                 alt={product.title}
                 label={{
                   title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  amount: showPrices ? product.priceRange.maxVariantPrice.amount : '',
+                  currencyCode: showPrices ? product.priceRange.maxVariantPrice.currencyCode : '',
+                  showPrice: showPrices
                 }}
                 src={product.featuredImage?.url}
                 fill

@@ -18,7 +18,13 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-export default function CartModal({ cart }: { cart: Cart | undefined }) {
+export default function CartModal({
+  cart,
+  isLoggedIn
+}: {
+  cart: Cart | undefined;
+  isLoggedIn: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
@@ -134,11 +140,17 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                               </div>
                             </Link>
                             <div className="flex h-16 flex-col justify-between">
-                              <Price
-                                className="flex justify-end space-y-2 text-right text-sm"
-                                amount={item.cost.totalAmount.amount}
-                                currencyCode={item.cost.totalAmount.currencyCode}
-                              />
+                              {isLoggedIn ? (
+                                <Price
+                                  className="flex justify-end space-y-2 text-right text-sm"
+                                  amount={item.cost.totalAmount.amount}
+                                  currencyCode={item.cost.totalAmount.currencyCode}
+                                />
+                              ) : (
+                                <Link href="/login" className="text-right text-sm hover:underline">
+                                  Sign in to view
+                                </Link>
+                              )}
                               <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
                                 <EditItemQuantityButton item={item} type="minus" />
                                 <p className="w-6 text-center">
@@ -155,11 +167,17 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                   <div className="py-4 text-sm text-neutral-400 dark:text-neutral-300">
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
                       <p className="text-sm text-[#46413b]">Taxes</p>
-                      <Price
-                        className="text-right text-base text-black dark:text-white"
-                        amount={cart.cost.totalTaxAmount.amount}
-                        currencyCode={cart.cost.totalTaxAmount.currencyCode || 'USD'}
-                      />
+                      {isLoggedIn ? (
+                        <Price
+                          className="text-right text-base text-black dark:text-white"
+                          amount={cart.cost.totalTaxAmount.amount}
+                          currencyCode={cart.cost.totalTaxAmount.currencyCode || 'USD'}
+                        />
+                      ) : (
+                        <Link href="/login" className="text-right text-sm hover:underline">
+                          Sign in to view
+                        </Link>
+                      )}
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                       <p className="text-sm text-[#46413b]">Shipping</p>
@@ -167,11 +185,17 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                       <p className="text-sm text-[#46413b]">Total</p>
-                      <Price
-                        className="text-right text-base text-black dark:text-white"
-                        amount={cart.cost.totalAmount.amount}
-                        currencyCode={cart.cost.totalAmount.currencyCode || 'USD'}
-                      />
+                      {isLoggedIn ? (
+                        <Price
+                          className="text-right text-base text-black dark:text-white"
+                          amount={cart.cost.totalAmount.amount}
+                          currencyCode={cart.cost.totalAmount.currencyCode || 'USD'}
+                        />
+                      ) : (
+                        <Link href="/login" className="text-right text-sm hover:underline">
+                          Sign in to view
+                        </Link>
+                      )}
                     </div>
                   </div>
                   <Link

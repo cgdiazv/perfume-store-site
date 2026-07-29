@@ -1,4 +1,5 @@
 import CheckoutMasterForm from 'components/checkout/checkout-form';
+import { isCustomerLoggedIn } from 'lib/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
@@ -13,6 +14,7 @@ interface CheckoutPageProps {
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
   const params = await searchParams;
   const cartId = params.id as string;
+  const showPrices = isCustomerLoggedIn();
 
   // Safe fallback guard step: if the cart is missing or expired, bounce them back out to shop catalog pages safely
   if (!cartId) {
@@ -32,7 +34,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
         </div>
 
         {/* Mount your master 3-step form engine, cleanly injecting your active BigCommerce cart reference id */}
-        <CheckoutMasterForm initialCheckoutId={cartId} />
+        <CheckoutMasterForm initialCheckoutId={cartId} showPrices={showPrices} />
       </div>
     </div>
   );

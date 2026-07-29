@@ -9,6 +9,7 @@ interface MethodStepProps {
   onNext: () => void;
   onBack: () => void;
   setLoading: (loading: boolean) => void;
+  showPrices: boolean;
 }
 
 // Simulated dynamic shipping rates mapped from carrier accounts configuration
@@ -33,7 +34,8 @@ export default function MethodStep({
   setFormData,
   onNext,
   onBack,
-  setLoading
+  setLoading,
+  showPrices
 }: MethodStepProps) {
   const [selectedMethodId, setSelectedMethodId] = useState<string>(
     formData.shippingMethodId || SHIPPING_METHODS[0]?.id || ''
@@ -206,7 +208,17 @@ export default function MethodStep({
                   </div>
                 </div>
                 <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
-                  {method.price === 0 ? 'FREE' : `$${method.price.toFixed(2)}`}
+                  {showPrices ? (
+                    method.price === 0 ? (
+                      'FREE'
+                    ) : (
+                      `$${method.price.toFixed(2)}`
+                    )
+                  ) : (
+                    <a href="/login" className="hover:underline">
+                      Sign in to view
+                    </a>
+                  )}
                 </span>
               </label>
             ))}

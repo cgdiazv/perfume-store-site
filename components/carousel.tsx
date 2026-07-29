@@ -1,3 +1,4 @@
+import { isCustomerLoggedIn } from 'lib/auth';
 import { getCollectionProducts } from 'lib/bigcommerce';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
@@ -5,6 +6,7 @@ import { GridTileImage } from './grid/tile';
 export async function Carousel() {
   // Collections that start with `hidden-*` are hidden from the search page.
   const products = await getCollectionProducts({ collection: 'hidden-homepage-carousel' });
+  const showPrices = isCustomerLoggedIn();
 
   if (!products?.length) return null;
 
@@ -24,8 +26,9 @@ export async function Carousel() {
                 alt={product.title}
                 label={{
                   title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  amount: showPrices ? product.priceRange.maxVariantPrice.amount : '',
+                  currencyCode: showPrices ? product.priceRange.maxVariantPrice.currencyCode : '',
+                  showPrice: showPrices
                 }}
                 src={product.featuredImage?.url}
                 fill

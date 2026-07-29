@@ -6,7 +6,13 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { GridTileImage } from './grid/tile';
 
-export default function BestSellersSlider({ products }: { products: VercelProduct[] }) {
+export default function BestSellersSlider({
+  products,
+  showPrices
+}: {
+  products: VercelProduct[];
+  showPrices: boolean;
+}) {
   const sliderRef = useRef<HTMLUListElement>(null);
 
   const scrollLeft = () => {
@@ -60,8 +66,9 @@ export default function BestSellersSlider({ products }: { products: VercelProduc
                 alt={product.title}
                 label={{
                   title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  amount: showPrices ? product.priceRange.maxVariantPrice.amount : '',
+                  currencyCode: showPrices ? product.priceRange.maxVariantPrice.currencyCode : '',
+                  showPrice: showPrices
                 }}
                 src={product.featuredImage?.url}
                 fill

@@ -1,4 +1,5 @@
 import { GridTileImage } from 'components/grid/tile';
+import { isCustomerLoggedIn } from 'lib/auth';
 import { getCollectionProducts } from 'lib/bigcommerce';
 import type { VercelProduct as Product } from 'lib/bigcommerce/types';
 import Link from 'next/link';
@@ -6,11 +7,13 @@ import Link from 'next/link';
 function ThreeItemGridItem({
   item,
   size,
-  priority
+  priority,
+  showPrices
 }: {
   item: Product;
   size: 'full' | 'half';
   priority?: boolean;
+  showPrices: boolean;
 }) {
   return (
     <div
@@ -28,8 +31,9 @@ function ThreeItemGridItem({
           label={{
             position: size === 'full' ? 'center' : 'bottom',
             title: item.title as string,
-            amount: item.priceRange.maxVariantPrice.amount,
-            currencyCode: item.priceRange.maxVariantPrice.currencyCode
+            amount: showPrices ? item.priceRange.maxVariantPrice.amount : '',
+            currencyCode: showPrices ? item.priceRange.maxVariantPrice.currencyCode : '',
+            showPrice: showPrices
           }}
         />
       </Link>
@@ -42,6 +46,7 @@ export async function ThreeItemGrid() {
   const homepageItems = await getCollectionProducts({
     collection: 'hidden-homepage-featured-items'
   });
+  const showPrices = isCustomerLoggedIn();
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
@@ -49,9 +54,9 @@ export async function ThreeItemGrid() {
 
   return (
     <section className="mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2">
-      <ThreeItemGridItem size="full" item={firstProduct} priority={true} />
-      <ThreeItemGridItem size="half" item={secondProduct} priority={true} />
-      <ThreeItemGridItem size="half" item={thirdProduct} />
+      <ThreeItemGridItem size="full" item={firstProduct} priority={true} showPrices={showPrices} />
+      <ThreeItemGridItem size="half" item={secondProduct} priority={true} showPrices={showPrices} />
+      <ThreeItemGridItem size="half" item={thirdProduct} showPrices={showPrices} />
     </section>
   );
 }

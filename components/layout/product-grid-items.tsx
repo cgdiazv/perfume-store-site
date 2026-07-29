@@ -1,9 +1,12 @@
 import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
+import { isCustomerLoggedIn } from 'lib/auth';
 import { VercelProduct as Product } from 'lib/bigcommerce/types';
 import Link from 'next/link';
 
 export default function ProductGridItems({ products }: { products: Product[] }) {
+  const showPrices = isCustomerLoggedIn();
+
   return (
     <>
       {products.map((product) => (
@@ -13,8 +16,9 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
               alt={product.title}
               label={{
                 title: product.title,
-                amount: product.priceRange.maxVariantPrice.amount,
-                currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                amount: showPrices ? product.priceRange.maxVariantPrice.amount : '',
+                currencyCode: showPrices ? product.priceRange.maxVariantPrice.currencyCode : '',
+                showPrice: showPrices
               }}
               src={product.featuredImage?.url}
               fill

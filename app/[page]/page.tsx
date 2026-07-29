@@ -8,11 +8,17 @@ export const runtime = 'edge';
 
 export const revalidate = 43200; // 12 hours in seconds
 
+const BLOCKED_PAGE_SLUGS = new Set(['latest-news']);
+
 export async function generateMetadata({
   params
 }: {
   params: { page: string };
 }): Promise<Metadata> {
+  if (BLOCKED_PAGE_SLUGS.has(params.page.toLowerCase())) {
+    return notFound();
+  }
+
   const page = await getPage(params.page);
 
   if (!page) return notFound();
@@ -29,6 +35,10 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { page: string } }) {
+  if (BLOCKED_PAGE_SLUGS.has(params.page.toLowerCase())) {
+    return notFound();
+  }
+
   const page = await getPage(params.page);
 
   if (!page) return notFound();

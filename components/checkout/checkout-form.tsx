@@ -15,7 +15,13 @@ export type CheckoutData = {
   couponCode: string;
 };
 
-export default function CheckoutMasterForm({ initialCheckoutId }: { initialCheckoutId: string }) {
+export default function CheckoutMasterForm({
+  initialCheckoutId,
+  showPrices
+}: {
+  initialCheckoutId: string;
+  showPrices: boolean;
+}) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<CheckoutData>({
@@ -58,6 +64,7 @@ export default function CheckoutMasterForm({ initialCheckoutId }: { initialCheck
             onNext={nextStep}
             onBack={prevStep}
             setLoading={setLoading}
+            showPrices={showPrices}
           />
         )}
         {step === 3 && (
