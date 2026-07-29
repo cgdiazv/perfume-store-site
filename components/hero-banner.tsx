@@ -7,17 +7,17 @@ import { useCallback, useEffect, useState } from 'react';
 const SLIDES = [
   {
     id: 1,
-    title: 'Minimal Scents',
+    title: 'Timeless Scents',
     highlight: 'Iconic Inspiration',
     subtitle:
-      'A clean, white fragrance edit inspired by timeless classics from Chanel, Gucci, and Dior.',
+      'A clean, fresh blend of fragrance edits inspired by timeless classics from Chanel, Gucci, and Dior.',
     ctaText: 'Shop Inspired Scents',
     ctaLink: '/search/men',
     bgImage: '/images/landing/background/1.webp'
   },
   {
     id: 2,
-    title: 'Soft White',
+    title: 'Sophisticated Blends',
     highlight: 'Gift Curation',
     subtitle:
       'Elegant daily and occasion picks inspired by the character of Paco Rabanne and Jean Paul Gaultier.',
