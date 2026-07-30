@@ -3,11 +3,15 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { firstName, lastName, email, password, phone, company } = await req.json();
+    const { firstName, lastName, email, password, phone, company, businessTaxId } =
+      await req.json();
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !phone || !company || !businessTaxId) {
       return NextResponse.json(
-        { error: 'First name, last name, email, and password are required.' },
+        {
+          error:
+            'First name, last name, email, password, phone, company name, and EIN are required.'
+        },
         { status: 400 }
       );
     }
@@ -18,7 +22,8 @@ export async function POST(req: Request) {
       email,
       password,
       phone,
-      company
+      company,
+      businessTaxId
     });
 
     return NextResponse.json({ success: true, customer: result }, { status: 201 });

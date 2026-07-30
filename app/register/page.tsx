@@ -11,6 +11,7 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
+  const [businessTaxId, setBusinessTaxId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -37,7 +38,8 @@ export default function RegisterPage() {
           email,
           password,
           phone,
-          company
+          company,
+          businessTaxId
         })
       });
 
@@ -56,6 +58,7 @@ export default function RegisterPage() {
       setConfirmPassword('');
       setPhone('');
       setCompany('');
+      setBusinessTaxId('');
     } catch (err) {
       setError('Unable to register account. Please try again.');
     } finally {
@@ -138,13 +141,14 @@ export default function RegisterPage() {
 
         <div>
           <label htmlFor="company" className="block text-sm font-medium leading-6 text-gray-900">
-            Company (optional)
+            Company name
           </label>
           <div className="mt-2">
             <input
               id="company"
               name="company"
               type="text"
+              required
               value={company}
               onChange={(event) => setCompany(event.target.value)}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
@@ -153,14 +157,35 @@ export default function RegisterPage() {
         </div>
 
         <div>
+          <label
+            htmlFor="businessTaxId"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            EIN
+          </label>
+          <div className="mt-2">
+            <input
+              id="businessTaxId"
+              name="businessTaxId"
+              type="text"
+              required
+              value={businessTaxId}
+              onChange={(event) => setBusinessTaxId(event.target.value)}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div>
           <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
-            Phone (optional)
+            Phone
           </label>
           <div className="mt-2">
             <input
               id="phone"
               name="phone"
               type="tel"
+              required
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"

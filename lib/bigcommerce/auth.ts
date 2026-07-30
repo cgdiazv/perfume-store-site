@@ -6,8 +6,9 @@ export type RegisterCustomerParams = {
   password: string;
   firstName: string;
   lastName: string;
-  phone?: string;
-  company?: string;
+  phone: string;
+  company: string;
+  businessTaxId: string;
 };
 
 const loginCustomerMutation = /* GraphQL */ `
@@ -46,7 +47,7 @@ export async function registerCustomer(customer: RegisterCustomerParams) {
         first_name: customer.firstName,
         last_name: customer.lastName,
         phone: customer.phone,
-        company: customer.company,
+        company: `${customer.company} | Tax ID: ${customer.businessTaxId}`,
         customer_group_id: 2,
         authentication: {
           force_password_reset: false,
