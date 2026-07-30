@@ -1,5 +1,4 @@
-﻿import { getCollectionProducts } from 'lib/bigcommerce';
-import Image from 'next/image';
+﻿import Image from 'next/image';
 
 export async function SignatureBenefits() {
   const benefits = [
@@ -10,14 +9,8 @@ export async function SignatureBenefits() {
     'Dedicated distributor account support'
   ];
 
-  const products = await getCollectionProducts({ collection: 'hidden-homepage-featured-items' });
-  const productWithImage = products.find((product) => product.featuredImage?.url);
-
-  const imageSrc = productWithImage?.featuredImage?.url || '/images/signature_benefits.png';
-  const imageAlt =
-    productWithImage?.featuredImage?.altText ||
-    productWithImage?.title ||
-    'Featured perfume product';
+  const imageSrc = '/images/products/black-phoenix.webp';
+  const imageAlt = 'Black Phoenix perfume bottle';
 
   return (
     <section className="bg-[#faf4f1] py-16 sm:py-24">
