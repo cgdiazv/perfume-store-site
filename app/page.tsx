@@ -2,7 +2,6 @@ import { BestSellers } from 'components/best-sellers'; // Import BestSellers com
 import { FAQs } from 'components/faqs';
 import { HeroBanner } from 'components/hero-banner'; // 1. Import your new Hero Component
 import { SignatureBenefits } from 'components/signature-benefits';
-import { getCollectionProducts } from 'lib/bigcommerce';
 import { Suspense } from 'react';
 
 export const runtime = 'edge';
@@ -15,13 +14,9 @@ export const metadata = {
   }
 };
 
-export default async function HomePage() {
-  const products = await getCollectionProducts({ collection: 'hidden-homepage-featured-items' });
-  const productsWithImage = products.filter((product) => product.featuredImage?.url);
-  const faqProduct = productsWithImage[1] || productsWithImage[0];
-
-  const faqImageSrc = faqProduct?.featuredImage?.url;
-  const faqImageAlt = faqProduct?.featuredImage?.altText || faqProduct?.title;
+export default function HomePage() {
+  const faqImageSrc = '/images/products/desert-rose.webp';
+  const faqImageAlt = 'Desert Rose perfume bottle';
 
   return (
     <>

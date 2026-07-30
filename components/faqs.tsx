@@ -45,7 +45,7 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
           </p>
 
           {/* Featured Image under FAQ subtext */}
-          <div className="relative mt-8 h-[320px] w-full overflow-hidden rounded-3xl border border-[#b42e31]/30 shadow-xl sm:h-[400px]">
+          <div className="relative mt-8 h-[300px] w-full max-w-md overflow-hidden rounded-3xl border border-[#b42e31]/30 shadow-xl sm:h-[400px] lg:h-[500px]">
             <Image
               src={imageSrc || '/images/faq_man_perfume.png'}
               alt={imageAlt || 'Man holding luxury perfume bottle'}
