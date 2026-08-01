@@ -19,7 +19,7 @@ import {
   updateCartLineItemMutation
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
-import { getCategoryQuery, getStoreCategoriesQuery } from './queries/category';
+import { getCategoryQuery } from './queries/category';
 import { getCheckoutQuery } from './queries/checkout';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
@@ -40,14 +40,11 @@ import {
   BigCommerceCategoryTreeItem,
   BigCommerceCheckoutOperation,
   BigCommerceCollectionOperation,
-  BigCommerceCollectionsOperation,
   BigCommerceCreateCartOperation,
   BigCommerceDeleteCartItemOperation,
   BigCommerceEntityIdOperation,
-  BigCommerceFeaturedProductsOperation,
   BigCommerceMenuOperation,
   BigCommerceNewestProductsOperation,
-  BigCommercePage,
   BigCommercePageOperation,
   BigCommercePagesOperation,
   BigCommerceProduct,
@@ -497,15 +494,15 @@ export async function getCollectionProducts({
   return bigCommerceToVercelProducts(productList);
 }
 
-const EXCLUDED_CATEGORY_SLUGS = ['for-men', 'for-women', 'unisex', 'wholesale'];
+const EXCLUDED_CATEGORY_SLUGS = ['for-men', 'for-women', 'for-unisex', 'wholesale'];
+const EXCLUDED_CATEGORY_NAMES = ['for men', 'for women', 'for unisex', 'wholesale'];
 
 export function isAllowedCategory(category: BigCommerceCategoryTreeItem): boolean {
   const slug = category.path.split('/').filter(Boolean).pop()?.toLowerCase() || '';
   const name = category.name.toLowerCase().trim();
 
   if (EXCLUDED_CATEGORY_SLUGS.includes(slug)) return false;
-  if (name === 'for men' || name === 'for women' || name === 'unisex' || name === 'wholesale')
-    return false;
+  if (EXCLUDED_CATEGORY_NAMES.includes(name)) return false;
   return true;
 }
 
@@ -560,7 +557,28 @@ export async function getMenu(handle: string): Promise<VercelMenu[]> {
     const categoryTree = res.body.data.site.categoryTree || [];
     const allowedCategories = categoryTree.filter(isAllowedCategory);
 
-    return allowedCategories.map((category) => {
+    const desiredOrder = [
+      'men',
+      'women',
+      'unisex',
+      'kids',
+      'gift sets for men',
+      'gift sets for women',
+      'tester for men',
+      'tester for women'
+    ];
+
+    const orderedCategories = [...allowedCategories].sort((a, b) => {
+      const aIndex = desiredOrder.indexOf(a.name.toLowerCase().trim());
+      const bIndex = desiredOrder.indexOf(b.name.toLowerCase().trim());
+
+      if (aIndex === -1 && bIndex === -1) return 0;
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+
+    return orderedCategories.map((category) => {
       const pathSlug = category.path.split('/').filter(Boolean).pop() ?? '';
       return {
         title: category.name,

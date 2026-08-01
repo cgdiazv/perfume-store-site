@@ -13,7 +13,7 @@ export default async function Navbar() {
 
   return (
     <NavbarScrollWrapper>
-      <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-6">
+      <nav className="relative mx-auto flex w-full max-w-[1600px] items-center justify-between px-4 lg:px-8">
         <div className="flex w-full items-center justify-between">
           {/* Left Side: Logo, Title, and Dynamic Links */}
           <div className="flex items-center gap-6">
