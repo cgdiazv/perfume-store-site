@@ -22,6 +22,7 @@ export type VercelPage = {
 export type VercelMenu = {
   title: string;
   path: string;
+  children?: VercelMenu[];
 };
 
 export type VercelCollection = {

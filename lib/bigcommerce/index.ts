@@ -552,7 +552,8 @@ export async function getCollections(): Promise<VercelCollection[]> {
 export async function getMenu(handle: string): Promise<VercelMenu[]> {
   if (handle === 'next-js-frontend-header-menu') {
     const res = await bigCommerceFetch<BigCommerceMenuOperation>({
-      query: getMenuQuery
+      query: getMenuQuery,
+      cache: 'no-store'
     });
     const categoryTree = res.body.data.site.categoryTree || [];
     const allowedCategories = categoryTree.filter(isAllowedCategory);
@@ -580,16 +581,26 @@ export async function getMenu(handle: string): Promise<VercelMenu[]> {
 
     return orderedCategories.map((category) => {
       const pathSlug = category.path.split('/').filter(Boolean).pop() ?? '';
+      const children = (category.children || []).filter(isAllowedCategory).map((childCategory) => {
+        const childPathSlug = childCategory.path.split('/').filter(Boolean).pop() ?? '';
+        return {
+          title: childCategory.name,
+          path: `/search/${childPathSlug}`
+        };
+      });
+
       return {
         title: category.name,
-        path: `/search/${pathSlug}`
+        path: `/search/${pathSlug}`,
+        ...(children.length ? { children } : {})
       };
     });
   }
 
   if (handle === 'next-js-frontend-footer-menu') {
     const res = await bigCommerceFetch<BigCommercePagesOperation>({
-      query: getPagesQuery
+      query: getPagesQuery,
+      cache: 'no-store'
     });
     const webPages = res.body.data.site.content.pages.edges.map((item) => item.node);
 
