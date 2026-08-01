@@ -552,8 +552,7 @@ export async function getCollections(): Promise<VercelCollection[]> {
 export async function getMenu(handle: string): Promise<VercelMenu[]> {
   if (handle === 'next-js-frontend-header-menu') {
     const res = await bigCommerceFetch<BigCommerceMenuOperation>({
-      query: getMenuQuery,
-      cache: 'no-store'
+      query: getMenuQuery
     });
     const categoryTree = res.body.data.site.categoryTree || [];
     const allowedCategories = categoryTree.filter(isAllowedCategory);
@@ -599,8 +598,7 @@ export async function getMenu(handle: string): Promise<VercelMenu[]> {
 
   if (handle === 'next-js-frontend-footer-menu') {
     const res = await bigCommerceFetch<BigCommercePagesOperation>({
-      query: getPagesQuery,
-      cache: 'no-store'
+      query: getPagesQuery
     });
     const webPages = res.body.data.site.content.pages.edges.map((item) => item.node);
 
