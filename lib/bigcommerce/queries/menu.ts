@@ -1,4 +1,5 @@
 export const getMenuQuery = /* GraphQL */ `
+  # Cache bust: ${Date.now()}
   query getMenu {
     site {
       categoryTree {
