@@ -89,7 +89,7 @@ export default async function AccountPage() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-sm font-medium text-gray-900">
-                            Order #{order.orderId}
+                            Order #{order.entityId}
                           </p>
                           <p className="text-sm text-gray-500">
                             Placed on {new Date(order.orderedAt.utc).toLocaleDateString()}
@@ -100,21 +100,8 @@ export default async function AccountPage() {
                             {order.totalIncTax.currencyCode} {order.totalIncTax.value.toFixed(2)}
                           </p>
                           <span className="mt-1 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
-                            {order.status.name}
+                            {order.status.value}
                           </span>
-                        </div>
-                      </div>
-                      <div className="mt-4">
-                        <p className="text-sm text-gray-500">
-                          {order.lineItems.physicalItems.length} items
-                        </p>
-                        <div className="mt-2 text-sm text-gray-700">
-                          {order.lineItems.physicalItems.map((item, idx) => (
-                            <span key={idx}>
-                              {item.quantity}x {item.name}
-                              {idx < order.lineItems.physicalItems.length - 1 ? ', ' : ''}
-                            </span>
-                          ))}
                         </div>
                       </div>
                     </li>

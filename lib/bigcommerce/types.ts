@@ -639,17 +639,12 @@ export type BigCommerceOrderLineItem = {
 
 export type BigCommerceOrder = {
   entityId: number;
-  orderId: number;
   status: {
-    name: string;
     value: string;
   };
   totalIncTax: BigCommerceMoney;
   orderedAt: {
     utc: string;
-  };
-  lineItems: {
-    physicalItems: BigCommerceOrderLineItem[];
   };
 };
 

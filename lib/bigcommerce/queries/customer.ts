@@ -28,9 +28,7 @@ export const getCustomerQuery = /* GraphQL */ `
         edges {
           node {
             entityId
-            orderId
             status {
-              name
               value
             }
             totalIncTax {
@@ -39,13 +37,6 @@ export const getCustomerQuery = /* GraphQL */ `
             }
             orderedAt {
               utc
-            }
-            lineItems {
-              physicalItems {
-                name
-                quantity
-                brand
-              }
             }
           }
         }
