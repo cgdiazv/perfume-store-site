@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
+import Pagination from 'components/pagination';
 import { defaultSort, sorting } from 'lib/constants';
 
 export const runtime = 'edge';
@@ -31,18 +32,26 @@ export default async function CategoryPage({
   params: { collection: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort } = searchParams as { [key: string]: string };
+  const { sort, cursor } = searchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
-  const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
+  const { products, pageInfo } = await getCollectionProducts({
+    collection: params.collection,
+    sortKey,
+    reverse,
+    cursor
+  });
 
   return (
     <section>
       {products.length === 0 ? (
         <p className="py-3 text-lg">{`No products found in this collection`}</p>
       ) : (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems products={products} />
-        </Grid>
+        <>
+          <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <ProductGridItems products={products} />
+          </Grid>
+          <Pagination pageInfo={pageInfo} />
+        </>
       )}
     </section>
   );

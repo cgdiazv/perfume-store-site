@@ -58,6 +58,7 @@ import {
   VercelCollection,
   VercelMenu,
   VercelPage,
+  PageInfo,
   VercelProduct
 } from './types';
 
@@ -428,12 +429,14 @@ export async function getCollection(handle: string): Promise<VercelCollection> {
 export async function getCollectionProducts({
   collection,
   reverse,
-  sortKey
+  sortKey,
+  cursor
 }: {
   collection: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<VercelProduct[]> {
+  cursor?: string;
+}): Promise<{ products: VercelProduct[]; pageInfo?: PageInfo }> {
   const expectedCollectionBreakpoints: Record<string, string> = {
     'hidden-homepage-carousel': 'carousel_collection',
     'hidden-homepage-featured-items': 'featured_collection'
@@ -449,11 +452,11 @@ export async function getCollectionProducts({
 
     if (!res.body.data.site.newestProducts) {
       console.log(`No collection found for \`${collection}\``);
-      return [];
+      return { products: [] };
     }
     const productList = res.body.data.site.newestProducts.edges.map((item) => item.node);
 
-    return bigCommerceToVercelProducts(productList);
+    return { products: bigCommerceToVercelProducts(productList) };
   }
 
   if (expectedCollectionBreakpoints[collection] === 'featured_collection') {
@@ -466,11 +469,11 @@ export async function getCollectionProducts({
 
     if (!res.body.data.site.newestProducts) {
       console.log(`No collection found for \`${collection}\``);
-      return [];
+      return { products: [] };
     }
     const productList = res.body.data.site.newestProducts.edges.map((item) => item.node);
 
-    return bigCommerceToVercelProducts(productList);
+    return { products: bigCommerceToVercelProducts(productList) };
   }
 
   const entityId = await getCategoryEntityIdbyHandle(collection);
@@ -481,17 +484,22 @@ export async function getCollectionProducts({
       entityId,
       first: 50,
       hideOutOfStock: false,
-      sortBy: sortBy === 'RELEVANCE' ? 'DEFAULT' : sortBy
+      sortBy: sortBy === 'RELEVANCE' ? 'DEFAULT' : sortBy,
+      after: cursor
     }
   });
 
   if (!res.body.data.site.category) {
     console.log(`No collection found for \`${collection}\``);
-    return [];
+    return { products: [] };
   }
   const productList = res.body.data.site.category.products.edges.map((item) => item.node);
+  const pageInfo = res.body.data.site.category.products.pageInfo;
 
-  return bigCommerceToVercelProducts(productList);
+  return {
+    products: bigCommerceToVercelProducts(productList),
+    pageInfo
+  };
 }
 
 const EXCLUDED_CATEGORY_SLUGS = ['for-men', 'for-women', 'for-unisex', 'wholesale'];
@@ -692,12 +700,14 @@ export async function getProductRecommendations(productId: string): Promise<Verc
 export async function getProducts({
   query,
   reverse,
-  sortKey
+  sortKey,
+  cursor
 }: {
   query?: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<VercelProduct[]> {
+  cursor?: string;
+}): Promise<{ products: VercelProduct[]; pageInfo?: PageInfo }> {
   const sort = vercelToBigCommerceSorting(reverse ?? false, sortKey);
   const targetCategoryIds = await getTargetCategoryIds();
 
@@ -709,15 +719,20 @@ export async function getProducts({
         categoryEntityIds: targetCategoryIds
       },
       sort,
-      first: 50
+      first: 50,
+      after: cursor
     }
   });
 
   const productList = res.body.data.site.search.searchProducts.products.edges.map(
     (item) => item.node
   );
+  const pageInfo = res.body.data.site.search.searchProducts.products.pageInfo;
 
-  return bigCommerceToVercelProducts(productList);
+  return {
+    products: bigCommerceToVercelProducts(productList),
+    pageInfo
+  };
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

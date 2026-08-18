@@ -1,6 +1,14 @@
 export type Maybe<T> = T | null;
 
+export type PageInfo = {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor: string | null;
+  endCursor: string | null;
+};
+
 export type Connection<T> = {
+  pageInfo?: PageInfo;
   edges: Array<Edge<T>>;
 };
 
@@ -283,6 +291,7 @@ export type BigCommerceSearchProductsOperation = {
     };
     sort?: string | null;
     first?: number;
+    after?: string;
   };
 };
 
@@ -318,6 +327,7 @@ export type BigCommerceProductsCollectionOperation = {
     sortBy: string | null;
     hideOutOfStock: boolean;
     first: number;
+    after?: string;
   };
 };
 

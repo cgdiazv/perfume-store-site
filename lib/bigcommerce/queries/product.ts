@@ -32,10 +32,17 @@ export const getProductsCollectionQuery = /* GraphQL */ `
     $sortBy: CategoryProductSort
     $hideOutOfStock: Boolean
     $first: Int
+    $after: String
   ) {
     site {
       category(entityId: $entityId) {
-        products(sortBy: $sortBy, hideOutOfStock: $hideOutOfStock, first: $first) {
+        products(sortBy: $sortBy, hideOutOfStock: $hideOutOfStock, first: $first, after: $after) {
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+          }
           edges {
             node {
               ...product
@@ -53,11 +60,18 @@ export const searchProductsQuery = /* GraphQL */ `
     $filters: SearchProductsFiltersInput!
     $sort: SearchProductsSortInput
     $first: Int
+    $after: String
   ) {
     site {
       search {
         searchProducts(filters: $filters, sort: $sort) {
-          products(first: $first) {
+          products(first: $first, after: $after) {
+            pageInfo {
+              hasNextPage
+              hasPreviousPage
+              startCursor
+              endCursor
+            }
             edges {
               node {
                 ...product

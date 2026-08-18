@@ -21,7 +21,7 @@ const requestedQueries = [
 export async function BestSellers() {
   const productResults = await Promise.all(
     requestedQueries.map(async (query) => {
-      const results = await getProducts({ query });
+      const { products: results } = await getProducts({ query });
       const normalizedQuery = query.toLowerCase();
 
       return (
