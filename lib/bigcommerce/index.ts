@@ -750,10 +750,12 @@ export async function getCustomer(
   const res = await bigCommerceFetch<BigCommerceCustomerOperation>({
     query: getCustomerQuery,
     headers: {
-      'X-Bc-Customer-Token': customerAccessToken
+      'X-Bc-Customer-Access-Token': customerAccessToken
     },
     cache: 'no-store'
   });
+
+  console.log('getCustomer Response:', JSON.stringify(res.body, null, 2));
 
   return res.body.data?.customer;
 }

@@ -11,16 +11,32 @@ export const metadata = {
 
 export default async function AccountPage() {
   const customerToken = cookies().get('bc_customer_token')?.value;
+  console.log('Account Page - customerToken:', customerToken);
 
   if (!customerToken) {
+    console.log('Account Page - No token, redirecting to login');
     redirect('/login');
   }
 
+  console.log('Account Page - Fetching customer data...');
   const customer = await getCustomer(customerToken);
+  console.log('Account Page - Fetch complete. Customer:', customer ? 'Found' : 'Null');
 
   if (!customer) {
-    // If the token is invalid or expired
-    redirect('/login');
+    console.log('Account Page - Customer is null, rendering error state');
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold text-gray-900">Unable to load account</h1>
+        <p className="mt-4 text-gray-600">
+          We could not load your account data. Your session may have expired, or the BigCommerce API
+          returned empty data.
+        </p>
+        <p className="mt-2 text-sm text-gray-500">Token present: {customerToken ? 'Yes' : 'No'}</p>
+        <a href="/login" className="mt-6 inline-block text-[#b42e31] underline">
+          Return to Login
+        </a>
+      </div>
+    );
   }
 
   const { firstName, lastName, email, phone, company, addresses, orders } = customer;
