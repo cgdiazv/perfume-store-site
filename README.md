@@ -2,14 +2,14 @@
 
 This is our fork of Vercel's Next.js storefront starter.
 
-> [!NOTE]
-> **✨ Looking for more out-of-the-box ecommerce functionality? Try Catalyst, BigCommerce's reference storefront for Next.js. ✨**
-> 
+> [!NOTE] > **✨ Looking for more out-of-the-box ecommerce functionality? Try Catalyst, BigCommerce's reference storefront for Next.js. ✨**
+>
 > Catalyst is our first-party developed and fully supported Next.js storefront, offering:
+>
 > - Deep integration with our 100s of commerce features, all powered by GraphQL
 > - Fully customizable UI kit built specifically for ecommerce
 > - Easily configurable multi-region and multi-lingual storefront support
-> 
+>
 > [Learn more at catalyst.dev →](https://catalyst.dev)
 
 ## Prerequisites
@@ -29,6 +29,7 @@ Clone the template repo manually and supply the environment variables [defined i
 ```bash
 npm i -g vercel
 ```
+
 - Link your local instance with the desired Vercel and GitHub accounts. This action creates a `.vercel` directory:
 
 ```bash

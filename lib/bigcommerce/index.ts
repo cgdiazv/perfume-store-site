@@ -31,6 +31,7 @@ import {
   getStoreProductsQuery,
   searchProductsQuery
 } from './queries/product';
+import { getCustomerQuery } from './queries/customer';
 import { getEntityIdByRouteQuery } from './queries/route';
 import { memoizedCartRedirectUrl } from './storefront-config';
 import {
@@ -59,7 +60,9 @@ import {
   VercelMenu,
   VercelPage,
   PageInfo,
-  VercelProduct
+  VercelProduct,
+  BigCommerceCustomerOperation,
+  BigCommerceCustomer
 } from './types';
 
 const channelIdSegment =
@@ -739,4 +742,18 @@ export async function getProducts({
 // eslint-disable-next-line no-unused-vars
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
+}
+
+export async function getCustomer(
+  customerAccessToken: string
+): Promise<BigCommerceCustomer | undefined> {
+  const res = await bigCommerceFetch<BigCommerceCustomerOperation>({
+    query: getCustomerQuery,
+    headers: {
+      'X-Bc-Customer-Token': customerAccessToken
+    },
+    cache: 'no-store'
+  });
+
+  return res.body.data?.customer;
 }

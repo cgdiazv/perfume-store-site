@@ -617,3 +617,56 @@ export type BigCommerceProduct = {
   variants: Connection<BigCommerceProductVariant>;
   productOptions: Connection<BigCommerceProductOption>;
 };
+
+export type BigCommerceAddress = {
+  entityId: number;
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2?: string;
+  city: string;
+  stateOrProvince: string;
+  postalCode: string;
+  countryCode: string;
+  phone: string;
+};
+
+export type BigCommerceOrderLineItem = {
+  name: string;
+  quantity: number;
+  brand?: string;
+};
+
+export type BigCommerceOrder = {
+  entityId: number;
+  orderId: number;
+  status: {
+    name: string;
+    value: string;
+  };
+  totalIncTax: BigCommerceMoney;
+  orderedAt: {
+    utc: string;
+  };
+  lineItems: {
+    physicalItems: BigCommerceOrderLineItem[];
+  };
+};
+
+export type BigCommerceCustomer = {
+  entityId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company?: string;
+  customerGroupId: number;
+  addresses: Connection<BigCommerceAddress>;
+  orders: Connection<BigCommerceOrder>;
+};
+
+export type BigCommerceCustomerOperation = {
+  data: {
+    customer: BigCommerceCustomer;
+  };
+};
