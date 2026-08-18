@@ -9,7 +9,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { VercelMenu as Menu } from 'lib/bigcommerce/types';
 import Search from './search';
 
-export default function MobileMenu({ menu }: { menu: Menu[] }) {
+export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLoggedIn?: boolean }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +88,35 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     ))}
                   </ul>
                 ) : null}
+
+                <div className="mt-8 flex flex-col gap-4 border-t border-neutral-200 pt-6 dark:border-neutral-700">
+                  {isLoggedIn ? (
+                    <Link
+                      href="/account"
+                      onClick={closeMobileMenu}
+                      className="text-lg font-medium text-current transition hover:opacity-70"
+                    >
+                      My account
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        href="/login"
+                        onClick={closeMobileMenu}
+                        className="text-lg font-medium text-current transition hover:opacity-70"
+                      >
+                        Sign in
+                      </Link>
+                      <Link
+                        href="/register"
+                        onClick={closeMobileMenu}
+                        className="w-full rounded-full bg-[#b42e31] px-4 py-3 text-center text-lg font-semibold text-white transition hover:bg-[#8f2226]"
+                      >
+                        Create account
+                      </Link>
+                    </>
+                  )}
+                </div>
               </div>
             </Dialog.Panel>
           </Transition.Child>
