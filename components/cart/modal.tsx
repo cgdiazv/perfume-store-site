@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
@@ -70,7 +70,7 @@ export default function CartModal({
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:text-white">
+            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-800 dark:bg-[#181412] dark:text-white">
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold">My Cart</p>
 
@@ -135,7 +135,7 @@ export default function CartModal({
                                   {item.merchandise.product.title}
                                 </span>
                                 {item.merchandise.title !== DEFAULT_OPTION ? (
-                                  <p className="text-sm text-[#46413b]">{item.merchandise.title}</p>
+                                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{item.merchandise.title}</p>
                                 ) : null}
                               </div>
                             </Link>
@@ -164,9 +164,9 @@ export default function CartModal({
                       );
                     })}
                   </ul>
-                  <div className="py-4 text-sm text-neutral-400 dark:text-neutral-300">
+                  <div className="py-4 text-sm text-neutral-500 dark:text-neutral-300">
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
-                      <p className="text-sm text-[#46413b]">Taxes</p>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">Taxes</p>
                       {isLoggedIn ? (
                         <Price
                           className="text-right text-base text-black dark:text-white"
@@ -180,11 +180,11 @@ export default function CartModal({
                       )}
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                      <p className="text-sm text-[#46413b]">Shipping</p>
-                      <p className="text-right text-sm text-[#46413b]">Calculated at checkout</p>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">Shipping</p>
+                      <p className="text-right text-sm text-neutral-600 dark:text-neutral-300">Calculated at checkout</p>
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                      <p className="text-sm text-[#46413b]">Total</p>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">Total</p>
                       {isLoggedIn ? (
                         <Price
                           className="text-right text-base text-black dark:text-white"

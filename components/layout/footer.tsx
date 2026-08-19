@@ -8,8 +8,8 @@ export default async function Footer() {
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
-    <footer className="bg-white text-sm text-neutral-500 dark:bg-white dark:text-neutral-500">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 border-t border-neutral-200 px-6 py-12 text-sm md:grid md:grid-cols-4 md:gap-8 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+    <footer className="bg-white text-sm text-neutral-500 dark:bg-[#12100e] dark:text-neutral-400">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 border-t border-neutral-200 px-6 py-12 text-sm md:grid md:grid-cols-4 md:gap-8 md:px-4 min-[1320px]:px-0 dark:border-neutral-800">
         <div>
           <h3 className="mb-4 font-semibold text-black dark:text-white">Atlanta</h3>
           <p className="mb-2">T: (+1) 770 674 5948</p>
@@ -79,7 +79,7 @@ export default async function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
+      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-800">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
           <p>
             &copy; {copyrightDate} {copyrightName}

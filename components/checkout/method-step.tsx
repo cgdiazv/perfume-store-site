@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -75,8 +75,8 @@ export default function MethodStep({
   };
 
   return (
-    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
-      <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black">
+    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-[#181412]">
+      <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black dark:text-white">
         2. Shipping Method & Billing
       </h2>
 

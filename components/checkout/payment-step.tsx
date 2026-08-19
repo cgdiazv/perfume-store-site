@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -59,8 +59,8 @@ export default function PaymentStep({
   };
 
   return (
-    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
-      <h2 className="mb-6 font-sans text-2xl font-bold uppercase tracking-wide text-black">
+    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-[#181412]">
+      <h2 className="mb-6 font-sans text-2xl font-bold uppercase tracking-wide text-black dark:text-white">
         3. Payment Method
       </h2>
 

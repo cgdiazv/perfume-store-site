@@ -30,21 +30,21 @@ export default function BestSellersSlider({
   return (
     <div className="w-full">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black">
+        <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black dark:text-white">
           Featured Wholesale Brands
         </h2>
         <div className="flex gap-2">
           <button
             onClick={scrollLeft}
             aria-label="Scroll left"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-gold-600 hover:text-gold-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-black dark:text-white transition-colors hover:border-gold-600 hover:text-gold-600 dark:hover:border-gold-600 dark:hover:text-gold-400"
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </button>
           <button
             onClick={scrollRight}
             aria-label="Scroll right"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-black transition-colors hover:border-gold-600 hover:text-gold-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-black dark:text-white transition-colors hover:border-gold-600 hover:text-gold-600 dark:hover:border-gold-600 dark:hover:text-gold-400"
           >
             <ChevronRightIcon className="h-5 w-5" />
           </button>

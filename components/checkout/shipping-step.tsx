@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CheckoutData } from './checkout-form';
@@ -84,8 +84,8 @@ export default function ShippingStep({
   };
 
   return (
-    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
-      <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black">
+    <div className="animate-fadeIn rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-[#181412]">
+      <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black dark:text-white">
         1. Shipping Address
       </h2>
 
@@ -101,7 +101,7 @@ export default function ShippingStep({
                   key={addr.id}
                   className={`flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-all ${
                     selectedAddressId === addr.id
-                      ? 'border-[#b42e31] bg-[#b42e31]/5 ring-1 ring-[#b42e31]'
+                      ? 'border-[#b42e31] bg-[#b42e31]/5 dark:bg-[#b42e31]/15 ring-1 ring-[#b42e31]'
                       : 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-800'
                   }`}
                 >
@@ -160,7 +160,7 @@ export default function ShippingStep({
               required
               value={newAddress.firstName}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -174,7 +174,7 @@ export default function ShippingStep({
               required
               value={newAddress.lastName}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -188,7 +188,7 @@ export default function ShippingStep({
               required
               value={newAddress.address1}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -201,7 +201,7 @@ export default function ShippingStep({
               name="address2"
               value={newAddress.address2}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -215,7 +215,7 @@ export default function ShippingStep({
               required
               value={newAddress.city}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -229,7 +229,7 @@ export default function ShippingStep({
               required
               value={newAddress.stateOrProvince}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -243,7 +243,7 @@ export default function ShippingStep({
               required
               value={newAddress.postalCode}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 
@@ -257,7 +257,7 @@ export default function ShippingStep({
               required
               value={newAddress.phone}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm dark:border-neutral-800"
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
           </div>
 

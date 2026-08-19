@@ -23,8 +23,8 @@ export default function NavbarScrollWrapper({ children }: { children: ReactNode 
   return (
     <header
       data-scrolled={isScrolled}
-      className={`fixed left-0 right-0 top-0 z-50 border-b border-neutral-200 bg-white transition-all duration-300 dark:border-neutral-300 dark:bg-white ${
-        isScrolled ? 'py-2.5 shadow-sm' : 'py-3.5'
+      className={`fixed left-0 right-0 top-0 z-50 border-b border-neutral-200 bg-white/95 text-black backdrop-blur-md transition-all duration-300 dark:border-neutral-800 dark:bg-[#12100e]/95 dark:text-white ${
+        isScrolled ? 'py-2.5 shadow-sm dark:shadow-neutral-900/50' : 'py-3.5'
       }`}
     >
       {children}

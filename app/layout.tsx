@@ -48,8 +48,27 @@ const montserrat = Montserrat({
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${montserrat.variable}`}>
-      <body className="selection:bg-gold-500/30 group flex min-h-screen flex-col bg-[#ffffff] text-black antialiased">
+    <html lang="en" className={`${cinzel.variable} ${montserrat.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var storedTheme = localStorage.getItem('theme');
+                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (storedTheme === 'dark' || (!storedTheme && supportDarkMode)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
+      </head>
+      <body className="selection:bg-gold-500/30 group flex min-h-screen flex-col bg-white text-black antialiased dark:bg-[#12100e] dark:text-neutral-100">
         <Navbar />
 
         {/* Main content clears space for the fixed navbar with 0 extra gap */}

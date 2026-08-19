@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
@@ -69,10 +69,10 @@ export default function RegisterPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mb-10 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
           Create a wholesale account
         </h1>
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg text-gray-600 dark:text-neutral-300">
           Register for distributor access and unlock wholesale catalog viewing, account support, and
           ordering tools.
         </p>
@@ -80,13 +80,13 @@ export default function RegisterPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm"
+        className="space-y-6 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-[#181412]"
       >
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200"
             >
               First name
             </label>
@@ -98,13 +98,13 @@ export default function RegisterPage() {
                 required
                 value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Last name
             </label>
             <div className="mt-2">
@@ -115,14 +115,14 @@ export default function RegisterPage() {
                 required
                 value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
             Email address
           </label>
           <div className="mt-2">
@@ -134,13 +134,13 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="company" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
             Company name
           </label>
           <div className="mt-2">
@@ -151,7 +151,7 @@ export default function RegisterPage() {
               required
               value={company}
               onChange={(event) => setCompany(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -159,7 +159,7 @@ export default function RegisterPage() {
         <div>
           <label
             htmlFor="businessTaxId"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200"
           >
             EIN
           </label>
@@ -171,13 +171,13 @@ export default function RegisterPage() {
               required
               value={businessTaxId}
               onChange={(event) => setBusinessTaxId(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
             Phone
           </label>
           <div className="mt-2">
@@ -188,14 +188,14 @@ export default function RegisterPage() {
               required
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Password
             </label>
             <div className="mt-2">
@@ -207,7 +207,7 @@ export default function RegisterPage() {
                 required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ export default function RegisterPage() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200"
             >
               Confirm password
             </label>
@@ -228,16 +228,16 @@ export default function RegisterPage() {
                 required
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
         </div>
 
-        {error && <div className="rounded-2xl bg-red-50 p-4 text-sm text-red-900">{error}</div>}
+        {error && <div className="rounded-2xl bg-red-50 p-4 text-sm text-red-900 dark:bg-red-950/60 dark:text-red-300 dark:border dark:border-red-900">{error}</div>}
 
         {success && (
-          <div className="rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900">{success}</div>
+          <div className="rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border dark:border-emerald-900">{success}</div>
         )}
 
         <button
@@ -249,7 +249,7 @@ export default function RegisterPage() {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-6 text-center text-sm text-gray-600 dark:text-neutral-400">
         Already have an account?{' '}
         <Link href="/login" className="font-semibold text-[#b42e31] hover:opacity-80">
           Sign in

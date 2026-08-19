@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 
 export async function SignatureBenefits() {
   const benefits = [
@@ -13,12 +13,12 @@ export async function SignatureBenefits() {
   const imageAlt = 'Black Phoenix perfume bottle';
 
   return (
-    <section className="bg-[#faf4f1] py-16 sm:py-24">
+    <section className="bg-[#faf4f1] dark:bg-[#181412] py-16 sm:py-24 transition-colors">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Text Content */}
           <div className="flex flex-col justify-center">
-            <h2 className="mb-8 text-3xl font-bold tracking-tight text-black sm:text-4xl">
+            <h2 className="mb-8 text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
               Why Distributors Choose Us
             </h2>
             <ul className="space-y-6">
@@ -40,7 +40,7 @@ export async function SignatureBenefits() {
                       />
                     </svg>
                   </div>
-                  <span className="ml-4 text-lg font-medium text-black">{benefit}</span>
+                  <span className="ml-4 text-lg font-medium text-black dark:text-neutral-200">{benefit}</span>
                 </li>
               ))}
             </ul>

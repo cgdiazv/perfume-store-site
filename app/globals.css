@@ -1,10 +1,9 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --color-white: #ffffff;
     --color-neutral-50: #faf4f1;
     --color-neutral-100: #f3e5e0;
 
@@ -12,19 +11,28 @@
     --color-gold-500: #8f2226;
     --color-gold-400: #d98a8c;
 
-    --color-black: #2b2524;
-
     --easing-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark {
+    --color-neutral-50: #181412;
+    --color-neutral-100: #241e1a;
   }
 }
 
 html,
 body {
   scroll-behavior: smooth;
-  background-color: var(--color-white) !important;
-  color: var(--color-black);
+  background-color: #ffffff;
+  color: #2b2524;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html.dark,
+html.dark body {
+  background-color: #12100e;
+  color: #f3ece8;
 }
 
 /* Custom Product Card Effects */
@@ -35,7 +43,16 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
+html.dark .card-product {
+  background-color: #1c1815;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .card-product:hover {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
   transform: translateY(-6px);
+}
+
+html.dark .card-product:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }

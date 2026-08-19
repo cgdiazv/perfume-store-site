@@ -7,6 +7,7 @@ import { getMenu } from 'lib/bigcommerce';
 import { VercelMenu as Menu } from 'lib/bigcommerce/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import ThemeToggle from 'components/theme-toggle';
 import MobileMenu from './mobile-menu';
 import NavbarScrollWrapper from './scroll-wrapper';
 
@@ -28,17 +29,17 @@ export default async function Navbar() {
                   <li key={item.title} className="group/nav-item relative pb-4">
                     <Link
                       href={item.path}
-                      className="whitespace-nowrap font-medium text-current no-underline transition-all duration-300 hover:opacity-50"
+                      className="whitespace-nowrap font-medium text-black transition-all duration-300 hover:opacity-50 dark:text-white"
                     >
                       {item.title}
                     </Link>
                     {item.children?.length ? (
-                      <ul className="absolute left-0 top-full z-50 mt-0 hidden min-w-[180px] flex-col rounded-lg border border-neutral-200 bg-white p-2 pt-4 shadow-lg group-focus-within/nav-item:flex group-hover/nav-item:flex dark:border-neutral-800 dark:bg-black">
+                      <ul className="absolute left-0 top-full z-50 mt-0 hidden min-w-[180px] flex-col rounded-lg border border-neutral-200 bg-white p-2 pt-4 shadow-lg group-focus-within/nav-item:flex group-hover/nav-item:flex dark:border-neutral-800 dark:bg-[#181412]">
                         {item.children.map((child) => (
                           <li key={child.title}>
                             <Link
                               href={child.path}
-                              className="block rounded-md px-3 py-2 text-sm text-current transition hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                              className="block rounded-md px-3 py-2 text-sm text-black transition hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
                             >
                               {child.title}
                             </Link>
@@ -53,12 +54,13 @@ export default async function Navbar() {
           </div>
 
           {/* Right Side: Account Links and Shopping Cart Drawer Toggle */}
-          <div className="flex flex-none items-center justify-end gap-4">
+          <div className="flex flex-none items-center justify-end gap-3 md:gap-4">
+            <ThemeToggle />
             <div className="hidden items-center gap-4 md:flex">
               {isLoggedIn ? (
                 <Link
                   href="/account"
-                  className="text-sm font-medium text-current transition hover:opacity-70"
+                  className="text-sm font-medium text-black transition hover:opacity-70 dark:text-white"
                 >
                   My account
                 </Link>
@@ -66,7 +68,7 @@ export default async function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    className="text-sm font-medium text-current transition hover:opacity-70"
+                    className="text-sm font-medium text-black transition hover:opacity-70 dark:text-white"
                   >
                     Sign in
                   </Link>

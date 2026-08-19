@@ -2,20 +2,19 @@ const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        white: 'var(--color-white)',
-        black: 'var(--color-black)',
         neutral: {
           50: 'var(--color-neutral-50)',
           100: 'var(--color-neutral-100)'
         },
         gold: {
-          400: 'var(--color-gold-400)',
-          500: 'var(--color-gold-500)',
-          600: 'var(--color-gold-600)'
+          400: '#d98a8c',
+          500: '#8f2226',
+          600: '#b42e31'
         }
       },
       fontFamily: {

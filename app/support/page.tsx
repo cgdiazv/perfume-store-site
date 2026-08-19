@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 
@@ -45,19 +45,19 @@ export default function SupportPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mb-10 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
           Contact Wholesale Support
         </h1>
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg text-gray-600 dark:text-neutral-300">
           We&apos;re here to support distributors and buyers with sourcing, orders, and account
           questions.
         </p>
       </div>
 
       {submitted ? (
-        <div className="rounded-2xl bg-[#f4ecde] p-8 text-center sm:p-10">
-          <h3 className="text-xl font-semibold text-gray-900">Thank you for contacting us!</h3>
-          <p className="mt-4 text-gray-600">
+        <div className="rounded-2xl bg-[#f4ecde] dark:bg-[#181412] dark:border dark:border-neutral-800 p-8 text-center sm:p-10">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Thank you for contacting us!</h3>
+          <p className="mt-4 text-gray-600 dark:text-neutral-300">
             Your message has been received. Our wholesale support team will reach out to you
             shortly.
           </p>
@@ -69,9 +69,9 @@ export default function SupportPage() {
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-[#181412]">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Name
             </label>
             <div className="mt-2">
@@ -81,13 +81,13 @@ export default function SupportPage() {
                 id="name"
                 autoComplete="name"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Email
             </label>
             <div className="mt-2">
@@ -97,13 +97,13 @@ export default function SupportPage() {
                 id="email"
                 autoComplete="email"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="subject" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Subject
             </label>
             <div className="mt-2">
@@ -112,13 +112,13 @@ export default function SupportPage() {
                 name="subject"
                 id="subject"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-200">
               Message
             </label>
             <div className="mt-2">
@@ -127,14 +127,14 @@ export default function SupportPage() {
                 id="message"
                 rows={4}
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#b42e31] dark:bg-neutral-900 dark:text-white dark:ring-neutral-700 dark:placeholder:text-neutral-500 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-700">
+            <div className="rounded-md bg-red-50 p-4 dark:bg-red-950/60 dark:border dark:border-red-900">
+              <p className="text-sm text-red-700 dark:text-red-300">
                 There was an error sending your message. Please try again.
               </p>
             </div>

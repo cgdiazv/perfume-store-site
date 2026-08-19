@@ -94,7 +94,7 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
                     <Link
                       href="/account"
                       onClick={closeMobileMenu}
-                      className="text-lg font-medium text-current transition hover:opacity-70"
+                      className="text-lg font-medium text-black transition hover:opacity-70 dark:text-white"
                     >
                       My account
                     </Link>
@@ -103,7 +103,7 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
                       <Link
                         href="/login"
                         onClick={closeMobileMenu}
-                        className="text-lg font-medium text-current transition hover:opacity-70"
+                        className="text-lg font-medium text-black transition hover:opacity-70 dark:text-white"
                       >
                         Sign in
                       </Link>

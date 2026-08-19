@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,8 +39,8 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Left Column: Title, Subtitle, and Featured Image */}
         <div className="flex flex-col">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">FAQs</h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">FAQs</h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-neutral-300">
             Everything you need to know about wholesale sourcing, ordering, and distributor support.
           </p>
 
@@ -64,12 +64,12 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-gray-200 bg-[#faf4f1] p-6 shadow-sm transition-all hover:border-[#b42e31]/40"
+                  className="rounded-2xl border border-gray-200 bg-[#faf4f1] p-6 shadow-sm transition-all hover:border-[#b42e31]/40 dark:border-neutral-800 dark:bg-[#181412] dark:hover:border-[#b42e31]/60"
                 >
                   <dt>
                     <button
                       onClick={() => toggleFaq(index)}
-                      className="flex w-full items-start justify-between text-left text-gray-900"
+                      className="flex w-full items-start justify-between text-left text-gray-900 dark:text-white"
                     >
                       <span className="text-lg font-semibold leading-7">{faq.question}</span>
                       <span className="ml-6 flex h-7 items-center">
@@ -86,7 +86,7 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
                           </svg>
                         ) : (
                           <svg
-                            className="h-6 w-6 text-gray-400"
+                            className="h-6 w-6 text-gray-400 dark:text-neutral-400"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth="2.5"
@@ -100,7 +100,7 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
                     </button>
                   </dt>
                   {isOpen && (
-                    <dd className="mt-4 pr-12 text-base leading-7 text-gray-600">{faq.answer}</dd>
+                    <dd className="mt-4 pr-12 text-base leading-7 text-gray-600 dark:text-neutral-300">{faq.answer}</dd>
                   )}
                 </div>
               );
@@ -108,10 +108,10 @@ export function FAQs({ imageSrc, imageAlt }: { imageSrc?: string; imageAlt?: str
           </dl>
 
           {/* Support Box */}
-          <div className="mt-8 rounded-2xl border border-neutral-100 bg-[#faf4f1] p-8 sm:p-10">
+          <div className="mt-8 rounded-2xl border border-neutral-100 bg-[#faf4f1] p-8 sm:p-10 dark:border-neutral-800 dark:bg-[#181412]">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Still have questions?</h3>
-              <p className="mt-2 text-sm text-gray-600">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Still have questions?</h3>
+              <p className="mt-2 text-sm text-gray-600 dark:text-neutral-300">
                 Contact our wholesale support team and we will help you with sourcing, orders, and
                 account questions.
               </p>

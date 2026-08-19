@@ -78,8 +78,8 @@ export default function CheckoutMasterForm({
       </div>
 
       {/* Floating Side Sidebar Panel for Step 3 Summary details */}
-      <div className="h-fit rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900">
-        <h3 className="mb-4 text-lg font-bold uppercase tracking-wider">Summary</h3>
+      <div className="h-fit rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-[#181412] dark:text-white">
+        <h3 className="mb-4 text-lg font-bold uppercase tracking-wider text-black dark:text-white">Summary</h3>
         {/* We will embed the order line-item map loop right here */}
       </div>
     </div>

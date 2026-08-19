@@ -43,12 +43,12 @@ export default async function AccountPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mb-10 flex flex-col justify-between border-b border-gray-200 pb-5 sm:flex-row sm:items-center">
+      <div className="mb-10 flex flex-col justify-between border-b border-gray-200 dark:border-neutral-800 pb-5 sm:flex-row sm:items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             My Account
           </h1>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-gray-500 dark:text-neutral-400">
             Welcome back, {firstName}! Manage your account details below.
           </p>
         </div>
@@ -60,29 +60,29 @@ export default async function AccountPage() {
       <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
         {/* Profile Information */}
         <div className="lg:col-span-1">
-          <h2 className="mb-6 text-xl font-semibold text-gray-900">Profile Details</h2>
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h2>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]">
             <dl className="space-y-4">
               <div>
-                <dt className="text-sm font-medium text-gray-500">Full Name</dt>
-                <dd className="mt-1 text-sm font-medium text-gray-900">
+                <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Full Name</dt>
+                <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">
                   {firstName} {lastName}
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500">Email Address</dt>
-                <dd className="mt-1 text-sm font-medium text-gray-900">{email}</dd>
+                <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Email Address</dt>
+                <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{email}</dd>
               </div>
               {phone && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
-                  <dd className="mt-1 text-sm font-medium text-gray-900">{phone}</dd>
+                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Phone Number</dt>
+                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{phone}</dd>
                 </div>
               )}
               {company && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500">Company</dt>
-                  <dd className="mt-1 text-sm font-medium text-gray-900">{company}</dd>
+                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Company</dt>
+                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{company}</dd>
                 </div>
               )}
             </dl>
@@ -93,29 +93,29 @@ export default async function AccountPage() {
         <div className="space-y-16 lg:col-span-2">
           {/* Order History */}
           <section>
-            <h2 className="mb-6 text-xl font-semibold text-gray-900">Order History</h2>
+            <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Order History</h2>
             {orders.edges.length > 0 ? (
-              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-                <ul role="list" className="divide-y divide-gray-200">
+              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-[#181412]">
+                <ul role="list" className="divide-y divide-gray-200 dark:divide-neutral-800">
                   {orders.edges.map(({ node: order }) => (
                     <li
                       key={order.entityId}
-                      className="p-6 transition-colors hover:bg-gray-50 sm:p-8"
+                      className="p-6 transition-colors hover:bg-gray-50 dark:hover:bg-neutral-900/50 sm:p-8"
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">
                             Order #{order.entityId}
                           </p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-neutral-400">
                             Placed on {new Date(order.orderedAt.utc).toLocaleDateString()}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">
                             {order.totalIncTax.currencyCode} {order.totalIncTax.value.toFixed(2)}
                           </p>
-                          <span className="mt-1 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                          <span className="mt-1 inline-flex items-center rounded-full bg-gray-100 dark:bg-neutral-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-neutral-200">
                             {order.status.value}
                           </span>
                         </div>
@@ -125,9 +125,9 @@ export default async function AccountPage() {
                 </ul>
               </div>
             ) : (
-              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-12 text-center">
-                <h3 className="text-sm font-semibold text-gray-900">No orders</h3>
-                <p className="mt-1 text-sm text-gray-500">
+              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-12 text-center dark:border-neutral-800 dark:bg-[#181412]">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">No orders</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">
                   You haven&apos;t placed any orders yet.
                 </p>
                 <div className="mt-6">
@@ -144,18 +144,18 @@ export default async function AccountPage() {
 
           {/* Addresses */}
           <section>
-            <h2 className="mb-6 text-xl font-semibold text-gray-900">Address Book</h2>
+            <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Address Book</h2>
             {addresses.edges.length > 0 ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {addresses.edges.map(({ node: address }) => (
                   <div
                     key={address.entityId}
-                    className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+                    className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]"
                   >
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-gray-900 dark:text-white">
                       {address.firstName} {address.lastName}
                     </p>
-                    <address className="mt-3 text-sm not-italic leading-relaxed text-gray-600">
+                    <address className="mt-3 text-sm not-italic leading-relaxed text-gray-600 dark:text-neutral-300">
                       {address.address1}
                       <br />
                       {address.address2 && (
@@ -168,14 +168,14 @@ export default async function AccountPage() {
                       <br />
                       {address.countryCode}
                     </address>
-                    {address.phone && <p className="mt-3 text-sm text-gray-600">{address.phone}</p>}
+                    {address.phone && <p className="mt-3 text-sm text-gray-600 dark:text-neutral-400">{address.phone}</p>}
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-12 text-center">
-                <h3 className="text-sm font-semibold text-gray-900">No addresses</h3>
-                <p className="mt-1 text-sm text-gray-500">
+              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-12 text-center dark:border-neutral-800 dark:bg-[#181412]">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">No addresses</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">
                   You haven&apos;t saved any addresses yet.
                 </p>
               </div>

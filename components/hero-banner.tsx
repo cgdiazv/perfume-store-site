@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -57,7 +57,7 @@ export function HeroBanner() {
 
   return (
     <div
-      className="relative flex h-[78vh] min-h-[560px] w-full items-center overflow-hidden bg-[#f8f7f4]"
+      className="relative flex h-[78vh] min-h-[560px] w-full items-center overflow-hidden bg-[#f8f7f4] dark:bg-[#12100e]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -71,13 +71,13 @@ export function HeroBanner() {
         >
           {/* Background image with gentle zoom for subtle motion. */}
           <div
-            className="saturate-75 absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat brightness-[1.03] transition-transform duration-[7000ms] ease-out"
+            className="saturate-75 absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat brightness-[1.03] dark:brightness-[0.6] transition-transform duration-[7000ms] ease-out"
             style={{
               backgroundImage: `url('${slide.bgImage}')`
             }}
           />
-          <div className="from-white/90 via-white/75 to-white/30 absolute inset-0 bg-gradient-to-r" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f8f7f4]/60 to-transparent" />
+          <div className="from-white/90 via-white/75 to-white/30 dark:from-[#12100e]/90 dark:via-[#12100e]/80 dark:to-[#12100e]/40 absolute inset-0 bg-gradient-to-r" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#f8f7f4]/60 dark:from-[#12100e]/80 to-transparent" />
         </div>
       ))}
 
@@ -90,27 +90,27 @@ export function HeroBanner() {
             return (
               <div
                 key={slide.id}
-                className="bg-white/85 flex animate-fadeIn flex-col items-start gap-5 rounded-[32px] border border-[#e7e4dd] p-7 text-[#2e2a26] shadow-[0_20px_55px_rgba(80,64,36,0.10)] backdrop-blur-md sm:p-8 md:p-10 md:pr-14"
+                className="bg-white/85 dark:bg-[#1c1815]/90 flex animate-fadeIn flex-col items-start gap-5 rounded-[32px] border border-[#e7e4dd] dark:border-neutral-800 p-7 text-[#2e2a26] dark:text-neutral-100 shadow-[0_20px_55px_rgba(80,64,36,0.10)] dark:shadow-[0_20px_55px_rgba(0,0,0,0.5)] backdrop-blur-md sm:p-8 md:p-10 md:pr-14"
               >
-                <h1 className="font-sans text-4xl font-semibold uppercase leading-[1.04] tracking-tight text-[#2e2a26] sm:text-5xl md:text-6xl">
+                <h1 className="font-sans text-4xl font-semibold uppercase leading-[1.04] tracking-tight text-[#2e2a26] dark:text-white sm:text-5xl md:text-6xl">
                   <span>{slide.title}</span>{' '}
                   <span className="mt-1 block text-[#b42e31]">{slide.highlight}</span>
                 </h1>
 
-                <p className="max-w-xl text-sm leading-relaxed text-[#4b433a] sm:text-base md:text-lg">
+                <p className="max-w-xl text-sm leading-relaxed text-[#4b433a] dark:text-neutral-300 sm:text-base md:text-lg">
                   {slide.subtitle}
                 </p>
 
                 <div className="mt-2 flex flex-wrap items-center gap-4">
                   <Link
                     href={slide.ctaLink}
-                    className="inline-flex items-center justify-center rounded-full bg-[#2f2923] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#171412]"
+                    className="inline-flex items-center justify-center rounded-full bg-[#2f2923] dark:bg-[#b42e31] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#171412] dark:hover:bg-[#8f2226]"
                   >
                     {slide.ctaText}
                   </Link>
                   <Link
                     href="/search"
-                    className="bg-white/70 inline-flex items-center justify-center rounded-full border border-[#d6cfc6] px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-[#2f2923] transition-all duration-300 hover:bg-white"
+                    className="bg-white/70 dark:bg-neutral-800/70 inline-flex items-center justify-center rounded-full border border-[#d6cfc6] dark:border-neutral-700 px-8 py-4 text-xs font-bold uppercase tracking-[0.15em] text-[#2f2923] dark:text-white transition-all duration-300 hover:bg-white dark:hover:bg-neutral-800"
                   >
                     Explore Wholesale Catalog
                   </Link>
@@ -124,7 +124,7 @@ export function HeroBanner() {
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
-        className="bg-white/85 absolute left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] md:left-8"
+        className="bg-white/85 dark:bg-[#1c1815]/90 absolute left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] dark:border-neutral-800 text-[#2f2923] dark:text-white shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] dark:hover:border-[#b42e31] dark:hover:text-[#b42e31] md:left-8"
       >
         <ChevronLeftIcon className="h-6 w-6" />
       </button>
@@ -132,19 +132,19 @@ export function HeroBanner() {
       <button
         onClick={nextSlide}
         aria-label="Next Slide"
-        className="bg-white/85 absolute right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] text-[#2f2923] shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] md:right-8"
+        className="bg-white/85 dark:bg-[#1c1815]/90 absolute right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-[#ddd5ca] dark:border-neutral-800 text-[#2f2923] dark:text-white shadow-md backdrop-blur-sm transition-all hover:border-[#b42e31] hover:text-[#b42e31] dark:hover:border-[#b42e31] dark:hover:text-[#b42e31] md:right-8"
       >
         <ChevronRightIcon className="h-6 w-6" />
       </button>
 
-      <div className="bg-white/80 absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-center gap-3 rounded-full border border-[#ddd5ca] px-5 py-2.5 shadow-md backdrop-blur-sm">
+      <div className="bg-white/80 dark:bg-[#1c1815]/80 absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-center gap-3 rounded-full border border-[#ddd5ca] dark:border-neutral-800 px-5 py-2.5 shadow-md backdrop-blur-sm">
         {SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrentIndex(i)}
             aria-label={`Go to slide ${i + 1}`}
             className={`h-2.5 rounded-full transition-all duration-500 ${
-              i === currentIndex ? 'w-8 bg-[#b42e31]' : 'w-2.5 bg-[#b9aea0] hover:bg-[#9f9384]'
+              i === currentIndex ? 'w-8 bg-[#b42e31]' : 'w-2.5 bg-[#b9aea0] dark:bg-neutral-600 hover:bg-[#9f9384] dark:hover:bg-neutral-500'
             }`}
           />
         ))}
