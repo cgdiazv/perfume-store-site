@@ -17,10 +17,12 @@ export type CheckoutData = {
 
 export default function CheckoutMasterForm({
   initialCheckoutId,
-  showPrices
+  showPrices,
+  savedAddresses = []
 }: {
   initialCheckoutId: string;
   showPrices: boolean;
+  savedAddresses?: any[];
 }) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
@@ -55,6 +57,7 @@ export default function CheckoutMasterForm({
             setFormData={setFormData}
             onNext={nextStep}
             setLoading={setLoading}
+            savedAddresses={savedAddresses}
           />
         )}
         {step === 2 && (

@@ -8,33 +8,18 @@ interface ShippingStepProps {
   setFormData: Dispatch<SetStateAction<CheckoutData>>;
   onNext: () => void;
   setLoading: (loading: boolean) => void;
+  savedAddresses?: any[];
 }
-
-// Dummy addresses mimicking your database/saved addresses profile data
-const SAVED_ADDRESSES = [
-  {
-    id: 'addr_1',
-    firstName: 'Carlos',
-    lastName: 'Diaz del Valle',
-    phone: '8329558892',
-    address1: '2926 Barker Cypress Rd Apt 7111',
-    address2: '',
-    city: 'Houston',
-    stateOrProvince: 'Texas',
-    postalCode: '77084',
-    countryCode: 'US',
-    country: 'United States'
-  }
-];
 
 export default function ShippingStep({
   formData,
   setFormData,
   onNext,
-  setLoading
+  setLoading,
+  savedAddresses = []
 }: ShippingStepProps) {
-  const [showAddressForm, setShowAddressForm] = useState(false);
-  const [selectedAddressId, setSelectedAddressId] = useState<string>(SAVED_ADDRESSES[0]?.id || '');
+  const [showAddressForm, setShowAddressForm] = useState(savedAddresses.length === 0);
+  const [selectedAddressId, setSelectedAddressId] = useState<string>(savedAddresses[0]?.id || '');
 
   // Local state for the "Add New Address" form matrix
   const [newAddress, setNewAddress] = useState({
@@ -71,7 +56,7 @@ export default function ShippingStep({
 
   const handleSelectSavedAddress = () => {
     setLoading(true);
-    const chosenAddress = SAVED_ADDRESSES.find((a) => a.id === selectedAddressId);
+    const chosenAddress = savedAddresses.find((a) => a.id === selectedAddressId);
 
     setTimeout(() => {
       setFormData((prev) => ({
@@ -92,11 +77,11 @@ export default function ShippingStep({
       {!showAddressForm ? (
         /* MODE A: Saved Addresses List (Replaces your Android RecyclerView) */
         <div className="space-y-4">
-          {SAVED_ADDRESSES.length === 0 ? (
+          {savedAddresses.length === 0 ? (
             <p className="py-4 text-sm text-neutral-500">No saved addresses found.</p>
           ) : (
             <div className="grid grid-cols-1 gap-3">
-              {SAVED_ADDRESSES.map((addr) => (
+              {savedAddresses.map((addr) => (
                 <label
                   key={addr.id}
                   className={`flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-all ${
