@@ -26,8 +26,8 @@ export default async function Navbar() {
             <Logo className="flex-none" />
           </div>
 
-          {/* Center: Centered & Longer Search Bar */}
-          <div className="flex flex-1 items-center justify-center max-w-2xl mx-auto">
+          {/* Center: Centered & Longer Search Bar (Desktop Only) */}
+          <div className="hidden flex-1 items-center justify-center max-w-2xl mx-auto md:flex">
             <Suspense fallback={<div className="h-10 w-full max-w-md rounded-full bg-neutral-100 dark:bg-neutral-800 animate-pulse" />}>
               <Search />
             </Suspense>
