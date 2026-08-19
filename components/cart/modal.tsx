@@ -43,6 +43,17 @@ export default function CartModal({
     }
   }, [isOpen, cart?.totalQuantity, quantityRef]);
 
+  const MIN_PURCHASE_AMOUNT = 100;
+  const subtotal = cart?.cost?.subtotalAmount?.amount
+    ? parseFloat(cart.cost.subtotalAmount.amount)
+    : cart?.cost?.totalAmount?.amount
+    ? parseFloat(cart.cost.totalAmount.amount)
+    : 0;
+
+  const percentage = Math.min(100, Math.max(0, (subtotal / MIN_PURCHASE_AMOUNT) * 100));
+  const remaining = Math.max(0, MIN_PURCHASE_AMOUNT - subtotal);
+  const isUnlocked = subtotal >= MIN_PURCHASE_AMOUNT;
+
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
@@ -77,6 +88,32 @@ export default function CartModal({
                 <button aria-label="Close cart" onClick={closeCart}>
                   <CloseCart />
                 </button>
+              </div>
+
+              {/* Progress Bar for Minimum Purchase Amount ($100) */}
+              <div className="mt-4 rounded-xl border border-neutral-200 bg-neutral-50 p-3.5 dark:border-neutral-800 dark:bg-[#12100e]">
+                <div className="flex items-center justify-between text-xs font-semibold">
+                  {isUnlocked ? (
+                    <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                      <span>🎉</span> Minimum purchase of ${MIN_PURCHASE_AMOUNT} reached!
+                    </span>
+                  ) : (
+                    <span className="text-gray-700 dark:text-neutral-300">
+                      Add <span className="font-bold text-[#b42e31]">${remaining.toFixed(2)}</span> more to reach ${MIN_PURCHASE_AMOUNT} minimum
+                    </span>
+                  )}
+                  <span className="font-semibold text-neutral-500 dark:text-neutral-400">
+                    {percentage.toFixed(0)}%
+                  </span>
+                </div>
+                <div className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ease-out ${
+                      isUnlocked ? 'bg-emerald-500' : 'bg-[#b42e31]'
+                    }`}
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
               </div>
 
               {!cart || cart.lines.length === 0 ? (
@@ -198,13 +235,30 @@ export default function CartModal({
                       )}
                     </div>
                   </div>
-                  <Link
-                    href={`/checkout?id=${cart.id}`}
-                    onClick={closeCart}
-                    className="block w-full rounded-full bg-[#b42e31] p-3 text-center text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
-                  >
-                    Proceed to Checkout
-                  </Link>
+
+                  {!isUnlocked ? (
+                    <>
+                      <p className="mb-2 text-center text-xs font-medium text-[#b42e31] dark:text-red-400">
+                        Minimum order amount is ${MIN_PURCHASE_AMOUNT}. Add ${remaining.toFixed(2)} more to unlock checkout.
+                      </p>
+                      <button
+                        type="button"
+                        disabled
+                        aria-disabled="true"
+                        className="block w-full cursor-not-allowed rounded-full bg-neutral-200 p-3 text-center text-sm font-bold uppercase tracking-wider text-neutral-400 dark:bg-neutral-800 dark:text-neutral-500"
+                      >
+                        Proceed to Checkout
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      href={`/checkout?id=${cart.id}`}
+                      onClick={closeCart}
+                      className="block w-full rounded-full bg-[#b42e31] p-3 text-center text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#8f2226] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b42e31]"
+                    >
+                      Proceed to Checkout
+                    </Link>
+                  )}
                 </div>
               )}
             </Dialog.Panel>
