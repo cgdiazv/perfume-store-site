@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ChevronDownIcon, ChevronUpIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { VercelMenu as Menu } from 'lib/bigcommerce/types';
 import Search from './search';
 
@@ -13,8 +13,14 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
+
+  const toggleExpand = (title: string) => {
+    setExpandedItems((prev) => ({ ...prev, [title]: !prev[title] }));
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,7 +67,7 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black">
+            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col overflow-y-auto bg-white pb-6 dark:bg-[#181412]">
               <div className="p-4">
                 <button
                   className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
@@ -76,16 +82,55 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
                 </div>
                 {menu.length ? (
                   <ul className="flex w-full flex-col">
-                    {menu.map((item: Menu) => (
-                      <li
-                        className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                        key={item.title}
-                      >
-                        <Link href={item.path} onClick={closeMobileMenu}>
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
+                    {menu.map((item: Menu) => {
+                      const hasChildren = Boolean(item.children?.length);
+                      const isExpanded = Boolean(expandedItems[item.title]);
+
+                      return (
+                        <li className="py-2" key={item.title}>
+                          <div className="flex items-center justify-between">
+                            <Link
+                              href={item.path}
+                              onClick={closeMobileMenu}
+                              className="text-lg font-semibold text-black transition-colors hover:text-[#b42e31] dark:text-white dark:hover:text-[#b42e31]"
+                            >
+                              {item.title}
+                            </Link>
+
+                            {hasChildren && (
+                              <button
+                                type="button"
+                                onClick={() => toggleExpand(item.title)}
+                                className="p-1 text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white"
+                                aria-label={`Toggle ${item.title} subcategories`}
+                              >
+                                {isExpanded ? (
+                                  <ChevronUpIcon className="h-5 w-5" />
+                                ) : (
+                                  <ChevronDownIcon className="h-5 w-5" />
+                                )}
+                              </button>
+                            )}
+                          </div>
+
+                          {hasChildren && isExpanded && (
+                            <ul className="mt-2.5 flex flex-col gap-2 pl-3 border-l-2 border-[#b42e31]/40 dark:border-[#b42e31]/60">
+                              {item.children?.map((child: Menu) => (
+                                <li key={child.title}>
+                                  <Link
+                                    href={child.path}
+                                    onClick={closeMobileMenu}
+                                    className="block py-1 text-base text-neutral-600 transition-colors hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                                  >
+                                    {child.title}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : null}
 
