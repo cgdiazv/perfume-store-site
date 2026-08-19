@@ -552,6 +552,22 @@ export async function getCollections(): Promise<VercelCollection[]> {
       const vercelCollection = bigCommerceToVercelCollection(catRes.body.data.site.category);
       if (vercelCollection) {
         vercelCollection.title = cat.name;
+
+        if (cat.children && cat.children.length) {
+          vercelCollection.children = cat.children
+            .filter(isAllowedCategory)
+            .map((childCat) => {
+              const childSlug = childCat.path.split('/').filter(Boolean).pop() ?? '';
+              return {
+                handle: childSlug,
+                title: childCat.name,
+                description: '',
+                seo: { title: childCat.name, description: '' },
+                updatedAt: new Date().toISOString(),
+                path: `/search/${childSlug}`
+              };
+            });
+        }
       }
       return vercelCollection;
     })

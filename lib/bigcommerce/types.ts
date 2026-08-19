@@ -40,6 +40,7 @@ export type VercelCollection = {
   seo: VercelSEO;
   updatedAt: string;
   path: string;
+  children?: VercelCollection[];
 };
 
 type VercelMoney = {

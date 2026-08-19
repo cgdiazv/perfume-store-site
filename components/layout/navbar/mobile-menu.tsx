@@ -91,7 +91,12 @@ export default function MobileMenu({ menu, isLoggedIn }: { menu: Menu[]; isLogge
                           <div className="flex items-center justify-between">
                             <Link
                               href={item.path}
-                              onClick={closeMobileMenu}
+                              onClick={() => {
+                                if (hasChildren) {
+                                  toggleExpand(item.title);
+                                }
+                                closeMobileMenu();
+                              }}
                               className="text-lg font-semibold text-black transition-colors hover:text-[#b42e31] dark:text-white dark:hover:text-[#b42e31]"
                             >
                               {item.title}
