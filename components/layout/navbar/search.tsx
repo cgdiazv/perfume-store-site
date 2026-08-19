@@ -25,19 +25,23 @@ export default function Search() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
+    <form onSubmit={onSubmit} className="relative w-full max-w-xl">
       <input
         key={searchParams?.get('q')}
         type="text"
         name="search"
-        placeholder="Search for products..."
+        placeholder="Search for perfumes, brands, notes..."
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full rounded-full border border-black bg-[#ffffff] px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
+        className="w-full rounded-full border border-neutral-300 bg-white py-2 pl-4 pr-10 text-sm text-black placeholder:text-neutral-500 focus:border-[#b42e31] focus:outline-none dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white dark:placeholder:text-neutral-400 dark:focus:border-[#b42e31]"
       />
-      <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-black dark:text-white">
-        <MagnifyingGlassIcon className="h-4" />
-      </div>
+      <button
+        type="submit"
+        aria-label="Search"
+        className="absolute right-0 top-0 mr-3 flex h-full items-center text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white"
+      >
+        <MagnifyingGlassIcon className="h-4 w-4" />
+      </button>
     </form>
   );
 }

@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import ThemeToggle from 'components/theme-toggle';
 import MobileMenu from './mobile-menu';
 import NavbarScrollWrapper from './scroll-wrapper';
+import Search from './search';
 
 export default async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
@@ -17,40 +18,19 @@ export default async function Navbar() {
 
   return (
     <NavbarScrollWrapper>
-      <nav className="relative mx-auto flex w-full max-w-[1600px] items-center justify-between px-4 lg:px-8">
-        <div className="flex w-full items-center justify-between">
-          {/* Left Side: Logo, Title, and Dynamic Links */}
-          <div className="flex items-center gap-6">
-            <Logo className="mr-2 lg:mr-4" />
+      <nav className="relative mx-auto flex w-full max-w-7xl flex-col gap-2.5 px-4 lg:px-6 min-[1320px]:px-0">
+        {/* Top Row: Logo (Left), Centered & Longer Search Bar (Center), Controls (Right) */}
+        <div className="flex w-full items-center justify-between gap-4 md:gap-8">
+          {/* Left Side: Logo */}
+          <div className="flex flex-none items-center">
+            <Logo className="flex-none" />
+          </div>
 
-            {menu.length ? (
-              <ul className="hidden flex-wrap gap-4 text-sm md:flex md:items-center lg:gap-6">
-                {menu.map((item: Menu) => (
-                  <li key={item.title} className="group/nav-item relative pb-4">
-                    <Link
-                      href={item.path}
-                      className="whitespace-nowrap font-medium text-black transition-all duration-300 hover:opacity-50 dark:text-white"
-                    >
-                      {item.title}
-                    </Link>
-                    {item.children?.length ? (
-                      <ul className="absolute left-0 top-full z-50 mt-0 hidden min-w-[180px] flex-col rounded-lg border border-neutral-200 bg-white p-2 pt-4 shadow-lg group-focus-within/nav-item:flex group-hover/nav-item:flex dark:border-neutral-800 dark:bg-[#181412]">
-                        {item.children.map((child) => (
-                          <li key={child.title}>
-                            <Link
-                              href={child.path}
-                              className="block rounded-md px-3 py-2 text-sm text-black transition hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
-                            >
-                              {child.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+          {/* Center: Centered & Longer Search Bar */}
+          <div className="flex flex-1 items-center justify-center max-w-2xl mx-auto">
+            <Suspense fallback={<div className="h-10 w-full max-w-md rounded-full bg-neutral-100 dark:bg-neutral-800 animate-pulse" />}>
+              <Search />
+            </Suspense>
           </div>
 
           {/* Right Side: Account Links and Shopping Cart Drawer Toggle */}
@@ -98,6 +78,38 @@ export default async function Navbar() {
             </div>
           </div>
         </div>
+
+        {/* Bottom Row: Left-Aligned Navigation Menu */}
+        {menu.length ? (
+          <div className="hidden w-full items-center justify-start border-t border-neutral-100 pt-2 md:flex dark:border-neutral-800/60">
+            <ul className="flex flex-wrap items-center justify-start gap-6 text-sm lg:gap-8">
+              {menu.map((item: Menu) => (
+                <li key={item.title} className="group/nav-item relative pb-1">
+                  <Link
+                    href={item.path}
+                    className="whitespace-nowrap font-medium text-black transition-all duration-300 hover:opacity-50 dark:text-white"
+                  >
+                    {item.title}
+                  </Link>
+                  {item.children?.length ? (
+                    <ul className="absolute left-0 top-full z-50 mt-0 hidden min-w-[180px] flex-col rounded-lg border border-neutral-200 bg-white p-2 shadow-lg group-focus-within/nav-item:flex group-hover/nav-item:flex dark:border-neutral-800 dark:bg-[#181412]">
+                      {item.children.map((child) => (
+                        <li key={child.title}>
+                          <Link
+                            href={child.path}
+                            className="block rounded-md px-3 py-2 text-sm text-black transition hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
+                          >
+                            {child.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </nav>
     </NavbarScrollWrapper>
   );

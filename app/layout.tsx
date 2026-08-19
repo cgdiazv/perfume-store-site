@@ -73,7 +73,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
         {/* Main content clears space for the fixed navbar with 0 extra gap */}
         <Suspense>
-          <main className="flex-grow pt-[65px] md:pt-[68px]">{children}</main>
+          <main className="flex-grow pt-[65px] md:pt-[105px]">{children}</main>
         </Suspense>
 
         <Suspense>
