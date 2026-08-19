@@ -1,7 +1,9 @@
+import EditAddressModal from 'components/account/edit-address-modal';
+import EditProfileModal from 'components/account/edit-profile-modal';
 import { getCustomer } from 'lib/bigcommerce';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import LogoutButton from './logout-button';
 
 export const metadata = {
@@ -57,41 +59,98 @@ export default async function AccountPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
-        {/* Profile Information */}
-        <div className="lg:col-span-1">
-          <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h2>
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]">
-            <dl className="space-y-4">
-              <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Full Name</dt>
-                <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">
-                  {firstName} {lastName}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Email Address</dt>
-                <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{email}</dd>
-              </div>
-              {phone && (
+      <div className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3">
+        {/* Left Column: Profile Details & Address Book */}
+        <div className="space-y-12 lg:col-span-1">
+          {/* Profile Details */}
+          <section>
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h2>
+              <EditProfileModal
+                customerId={customer.entityId}
+                firstName={firstName}
+                lastName={lastName}
+                phone={phone}
+                company={company}
+              />
+            </div>
+            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]">
+              <dl className="space-y-4">
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Phone Number</dt>
-                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{phone}</dd>
+                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Full Name</dt>
+                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">
+                    {firstName} {lastName}
+                  </dd>
                 </div>
-              )}
-              {company && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Company</dt>
-                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{company}</dd>
+                  <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Email Address</dt>
+                  <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{email}</dd>
                 </div>
-              )}
-            </dl>
-          </div>
+                {phone && (
+                  <div>
+                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Phone Number</dt>
+                    <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{phone}</dd>
+                  </div>
+                )}
+                {company && (
+                  <div>
+                    <dt className="text-sm font-medium text-gray-500 dark:text-neutral-400">Company</dt>
+                    <dd className="mt-1 text-sm font-medium text-gray-900 dark:text-white">{company}</dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          </section>
+
+          {/* Address Book */}
+          <section>
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Address Book</h2>
+              <EditAddressModal customerId={customer.entityId} mode="add" />
+            </div>
+            {addresses.edges.length > 0 ? (
+              <div className="flex flex-col gap-6">
+                {addresses.edges.map(({ node: address }) => (
+                  <div
+                    key={address.entityId}
+                    className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {address.firstName} {address.lastName}
+                      </p>
+                      <EditAddressModal customerId={customer.entityId} address={address} mode="edit" />
+                    </div>
+                    <address className="mt-3 text-sm not-italic leading-relaxed text-gray-600 dark:text-neutral-300">
+                      {address.address1}
+                      <br />
+                      {address.address2 && (
+                        <>
+                          {address.address2}
+                          <br />
+                        </>
+                      )}
+                      {address.city}, {address.stateOrProvince} {address.postalCode}
+                      <br />
+                      {address.countryCode}
+                    </address>
+                    {address.phone && <p className="mt-3 text-sm text-gray-600 dark:text-neutral-400">{address.phone}</p>}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-8 text-center dark:border-neutral-800 dark:bg-[#181412]">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">No addresses</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">
+                  You haven&apos;t saved any addresses yet.
+                </p>
+              </div>
+            )}
+          </section>
         </div>
 
-        {/* Addresses and Orders */}
-        <div className="space-y-16 lg:col-span-2">
-          {/* Order History */}
+        {/* Right Column: Order History */}
+        <div className="lg:col-span-2">
           <section>
             <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Order History</h2>
             {orders.edges.length > 0 ? (
@@ -138,46 +197,6 @@ export default async function AccountPage() {
                     Start Shopping
                   </Link>
                 </div>
-              </div>
-            )}
-          </section>
-
-          {/* Addresses */}
-          <section>
-            <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Address Book</h2>
-            {addresses.edges.length > 0 ? (
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {addresses.edges.map(({ node: address }) => (
-                  <div
-                    key={address.entityId}
-                    className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-[#181412]"
-                  >
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {address.firstName} {address.lastName}
-                    </p>
-                    <address className="mt-3 text-sm not-italic leading-relaxed text-gray-600 dark:text-neutral-300">
-                      {address.address1}
-                      <br />
-                      {address.address2 && (
-                        <>
-                          {address.address2}
-                          <br />
-                        </>
-                      )}
-                      {address.city}, {address.stateOrProvince} {address.postalCode}
-                      <br />
-                      {address.countryCode}
-                    </address>
-                    {address.phone && <p className="mt-3 text-sm text-gray-600 dark:text-neutral-400">{address.phone}</p>}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-12 text-center dark:border-neutral-800 dark:bg-[#181412]">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">No addresses</h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">
-                  You haven&apos;t saved any addresses yet.
-                </p>
               </div>
             )}
           </section>
