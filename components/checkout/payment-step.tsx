@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { CheckoutData } from './checkout-form';
 import { clearCart } from 'components/cart/actions';
+import PasswordInput from 'components/password-input';
 
 interface PaymentStepProps {
   formData: CheckoutData;
@@ -120,15 +121,14 @@ export default function PaymentStep({
             <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
               Security Code (CVC)
             </label>
-            <input
-              type="password"
+            <PasswordInput
               name="cvc"
               placeholder="CVC"
               required
               maxLength={4}
               value={cardInfo.cvc}
               onChange={handleInputChange}
-              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:border-neutral-800 dark:text-white"
+              className="w-full rounded-md border bg-transparent p-2.5 text-sm text-black dark:border-neutral-800 dark:text-white"
             />
           </div>
         </div>

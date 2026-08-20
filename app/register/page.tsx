@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import PasswordInput from 'components/password-input';
 
 export default function RegisterPage() {
   const [firstName, setFirstName] = useState('');
@@ -199,10 +200,9 @@ export default function RegisterPage() {
               Password
             </label>
             <div className="mt-2">
-              <input
+              <PasswordInput
                 id="password"
                 name="password"
-                type="password"
                 autoComplete="new-password"
                 required
                 value={password}
@@ -220,10 +220,9 @@ export default function RegisterPage() {
               Confirm password
             </label>
             <div className="mt-2">
-              <input
+              <PasswordInput
                 id="confirmPassword"
                 name="confirmPassword"
-                type="password"
                 autoComplete="new-password"
                 required
                 value={confirmPassword}

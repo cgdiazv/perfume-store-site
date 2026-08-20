@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import PasswordInput from 'components/password-input';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -75,10 +76,9 @@ export default function LoginPage() {
             Password
           </label>
           <div className="mt-2">
-            <input
+            <PasswordInput
               id="password"
               name="password"
-              type="password"
               autoComplete="current-password"
               required
               value={password}
