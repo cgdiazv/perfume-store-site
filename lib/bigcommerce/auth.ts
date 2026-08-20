@@ -42,30 +42,40 @@ export async function registerCustomer(customer: RegisterCustomerParams) {
         'Content-Type': 'application/json',
         'X-Auth-Token': process.env.BIGCOMMERCE_ACCESS_TOKEN
       },
-      body: JSON.stringify({
-        email: customer.email,
-        first_name: customer.firstName,
-        last_name: customer.lastName,
-        phone: customer.phone,
-        company: `${customer.company} | Tax ID: ${customer.businessTaxId}`,
-        customer_group_id: 2,
-        authentication: {
-          force_password_reset: false,
-          password: customer.password
+      body: JSON.stringify([
+        {
+          email: customer.email,
+          first_name: customer.firstName,
+          last_name: customer.lastName,
+          phone: customer.phone,
+          company: `${customer.company} | Tax ID: ${customer.businessTaxId}`,
+          customer_group_id: 2,
+          authentication: {
+            force_password_reset: false,
+            password: customer.password
+          }
         }
-      })
+      ])
     }
   );
 
   const payload = await response.json();
 
   if (!response.ok) {
-    const message =
-      payload?.title ||
-      payload?.message ||
-      payload?.errors?.[0]?.message ||
-      'Failed to create BigCommerce customer.';
-    throw new Error(message);
+    let message = payload?.title || payload?.detail || payload?.message;
+    if (payload?.errors) {
+      if (typeof payload.errors === 'string') {
+        message = payload.errors;
+      } else if (Array.isArray(payload.errors)) {
+        message = payload.errors.map((e: any) => e?.message || e).join(', ');
+      } else if (typeof payload.errors === 'object') {
+        const errorValues = Object.values(payload.errors);
+        if (errorValues.length > 0) {
+          message = errorValues.join(', ');
+        }
+      }
+    }
+    throw new Error(message || 'Failed to create BigCommerce customer.');
   }
 
   return payload;
