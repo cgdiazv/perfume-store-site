@@ -20,6 +20,7 @@ export default function ShippingStep({
 }: ShippingStepProps) {
   const [showAddressForm, setShowAddressForm] = useState(savedAddresses.length === 0);
   const [selectedAddressId, setSelectedAddressId] = useState<string>(savedAddresses[0]?.id || '');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Local state for the "Add New Address" form matrix
   const [newAddress, setNewAddress] = useState({
@@ -39,33 +40,59 @@ export default function ShippingStep({
     setNewAddress((prev) => ({ ...prev, [name]: value }));
   };
 
+  const processShippingAddress = async (targetAddress: any) => {
+    setLoading(true);
+    setErrorMsg(null);
+
+    try {
+      if (formData.checkoutId) {
+        const res = await fetch('/api/checkout/shipping-rates', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            checkoutId: formData.checkoutId,
+            shippingAddress: targetAddress
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setFormData((prev) => ({
+            ...prev,
+            shippingAddress: targetAddress,
+            consignmentId: data.consignmentId,
+            availableShippingMethods: data.shippingOptions || []
+          }));
+          setLoading(false);
+          onNext();
+          return;
+        } else {
+          console.warn('Shipping rates fetch error:', data.error);
+        }
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch dynamic shipping options:', err);
+    }
+
+    // Fallback if checkoutId is missing or API failed
+    setFormData((prev) => ({
+      ...prev,
+      shippingAddress: targetAddress
+    }));
+    setLoading(false);
+    onNext();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
-    // Simulate short network latency processing payload
-    setTimeout(() => {
-      setFormData((prev) => ({
-        ...prev,
-        shippingAddress: newAddress
-      }));
-      setLoading(false);
-      onNext();
-    }, 600);
+    processShippingAddress(newAddress);
   };
 
   const handleSelectSavedAddress = () => {
-    setLoading(true);
     const chosenAddress = savedAddresses.find((a) => a.id === selectedAddressId);
-
-    setTimeout(() => {
-      setFormData((prev) => ({
-        ...prev,
-        shippingAddress: chosenAddress
-      }));
-      setLoading(false);
-      onNext();
-    }, 500);
+    if (chosenAddress) {
+      processShippingAddress(chosenAddress);
+    }
   };
 
   return (
@@ -73,6 +100,11 @@ export default function ShippingStep({
       <h2 className="font-sans text-2xl font-bold uppercase tracking-wide text-black dark:text-white">
         1. Shipping Address
       </h2>
+      {errorMsg && (
+        <div className="mt-2 rounded bg-red-50 p-3 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-400">
+          {errorMsg}
+        </div>
+      )}
 
       {!showAddressForm ? (
         /* MODE A: Saved Addresses List (Replaces your Android RecyclerView) */

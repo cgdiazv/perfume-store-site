@@ -5,12 +5,25 @@ import MethodStep from './method-step';
 import PaymentStep from './payment-step';
 import ShippingStep from './shipping-step';
 
+export type ShippingMethodOption = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  type?: string;
+  transitTime?: string;
+};
+
 export type CheckoutData = {
   checkoutId: string;
+  consignmentId?: string;
+  availableShippingMethods?: ShippingMethodOption[];
   shippingAddress: any;
   billingAddress: any;
   sameAsShipping: boolean;
   shippingMethodId: string;
+  shippingCost?: number;
+  grandTotal?: number;
   orderComments: string;
   couponCode: string;
 };
@@ -28,10 +41,14 @@ export default function CheckoutMasterForm({
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<CheckoutData>({
     checkoutId: initialCheckoutId,
+    consignmentId: '',
+    availableShippingMethods: [],
     shippingAddress: null,
     billingAddress: null,
     sameAsShipping: true,
     shippingMethodId: '',
+    shippingCost: 0,
+    grandTotal: 0,
     orderComments: '',
     couponCode: ''
   });

@@ -12,8 +12,8 @@ interface MethodStepProps {
   showPrices: boolean;
 }
 
-// Simulated dynamic shipping rates mapped from carrier accounts configuration
-const SHIPPING_METHODS = [
+// Fallback shipping rates if dynamic fetch returns empty
+const DEFAULT_SHIPPING_METHODS = [
   {
     id: 'sm_1',
     name: 'Standard Delivery',
@@ -37,8 +37,13 @@ export default function MethodStep({
   setLoading,
   showPrices
 }: MethodStepProps) {
+  const shippingMethods =
+    formData.availableShippingMethods && formData.availableShippingMethods.length > 0
+      ? formData.availableShippingMethods
+      : DEFAULT_SHIPPING_METHODS;
+
   const [selectedMethodId, setSelectedMethodId] = useState<string>(
-    formData.shippingMethodId || SHIPPING_METHODS[0]?.id || ''
+    formData.shippingMethodId || shippingMethods[0]?.id || ''
   );
   const [billingAddress, setBillingAddress] = useState({
     firstName: '',
@@ -59,19 +64,46 @@ export default function MethodStep({
     setFormData((prev) => ({ ...prev, sameAsShipping: e.target.checked }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setFormData((prev) => ({
-        ...prev,
-        shippingMethodId: selectedMethodId,
-        billingAddress: prev.sameAsShipping ? prev.shippingAddress : billingAddress
-      }));
-      setLoading(false);
-      onNext();
-    }, 600);
+    const chosenMethod = shippingMethods.find((m) => m.id === selectedMethodId);
+    let updatedCost = chosenMethod?.price ?? 0;
+    let newGrandTotal = formData.grandTotal;
+
+    try {
+      if (formData.checkoutId && formData.consignmentId && selectedMethodId) {
+        const res = await fetch('/api/checkout/select-shipping-option', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            checkoutId: formData.checkoutId,
+            consignmentId: formData.consignmentId,
+            shippingOptionId: selectedMethodId
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success && data.costs) {
+          updatedCost = data.costs.shippingCost;
+          newGrandTotal = data.costs.grandTotal;
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to update shipping option on BigCommerce consignment:', err);
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      shippingMethodId: selectedMethodId,
+      shippingCost: updatedCost,
+      grandTotal: newGrandTotal,
+      billingAddress: prev.sameAsShipping ? prev.shippingAddress : billingAddress
+    }));
+
+    setLoading(false);
+    onNext();
   };
 
   return (
@@ -183,7 +215,7 @@ export default function MethodStep({
             Available Shipping Methods
           </label>
           <div className="grid grid-cols-1 gap-2.5">
-            {SHIPPING_METHODS.map((method) => (
+            {shippingMethods.map((method) => (
               <label
                 key={method.id}
                 className={`flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-all ${

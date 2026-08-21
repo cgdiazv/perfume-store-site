@@ -41,6 +41,14 @@ export default async function Footer() {
                 Distributor Support
               </Link>
             </li>
+            <li>
+              <Link
+                href="/terms-and-conditions"
+                className="transition-colors hover:text-black dark:hover:text-white"
+              >
+                Terms & Conditions
+              </Link>
+            </li>
           </ul>
         </div>
         <div>

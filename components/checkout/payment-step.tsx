@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { CheckoutData } from './checkout-form';
 import { clearCart } from 'components/cart/actions';
@@ -158,7 +159,12 @@ export default function PaymentStep({
 
         {/* Terms and Conditions Acceptance Link Block */}
         <div className="space-y-2 pt-2">
-          <div className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#b42e31] hover:underline">
+          <Link
+            href="/terms-and-conditions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-fit cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#b42e31] hover:underline"
+          >
             <span>Terms and Conditions</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +180,7 @@ export default function PaymentStep({
                 d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
               />
             </svg>
-          </div>
+          </Link>
 
           <label className="flex cursor-pointer select-none items-center gap-3">
             <input
