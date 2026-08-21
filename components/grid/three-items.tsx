@@ -33,7 +33,8 @@ function ThreeItemGridItem({
             title: item.title as string,
             amount: showPrices ? item.priceRange.maxVariantPrice.amount : '',
             currencyCode: showPrices ? item.priceRange.maxVariantPrice.currencyCode : '',
-            showPrice: showPrices
+            showPrice: showPrices,
+            availableForSale: item.availableForSale
           }}
         />
       </Link>

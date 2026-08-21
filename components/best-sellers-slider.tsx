@@ -68,7 +68,8 @@ export default function BestSellersSlider({
                   title: product.title,
                   amount: showPrices ? product.priceRange.maxVariantPrice.amount : '',
                   currencyCode: showPrices ? product.priceRange.maxVariantPrice.currencyCode : '',
-                  showPrice: showPrices
+                  showPrice: showPrices,
+                  availableForSale: product.availableForSale
                 }}
                 src={product.featuredImage?.url}
                 fill

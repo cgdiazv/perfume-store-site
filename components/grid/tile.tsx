@@ -15,6 +15,7 @@ export function GridTileImage({
     amount?: string;
     currencyCode?: string;
     showPrice?: boolean;
+    availableForSale?: boolean;
     position?: 'bottom' | 'center';
   };
 } & React.ComponentProps<typeof Image>) {
@@ -38,12 +39,18 @@ export function GridTileImage({
           {...props}
         />
       ) : null}
+      {label?.availableForSale === false && (
+        <span className="absolute top-2.5 right-2.5 z-10 rounded-md bg-neutral-900/80 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+          Out of Stock
+        </span>
+      )}
       {label ? (
         <Label
           title={label.title}
           amount={label.amount}
           currencyCode={label.currencyCode}
           showPrice={label.showPrice}
+          availableForSale={label.availableForSale}
           position={label.position}
         />
       ) : null}

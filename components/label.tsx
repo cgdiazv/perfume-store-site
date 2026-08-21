@@ -6,12 +6,14 @@ const Label = ({
   amount,
   currencyCode,
   showPrice = true,
+  availableForSale = true,
   position = 'bottom'
 }: {
   title: string;
   amount?: string;
   currencyCode?: string;
   showPrice?: boolean;
+  availableForSale?: boolean;
   position?: 'bottom' | 'center';
 }) => {
   return (
@@ -22,7 +24,11 @@ const Label = ({
     >
       <div className="bg-white/70 dark:bg-black/70 flex items-center rounded-full border p-1 text-xs font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:text-white">
         <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">{title}</h3>
-        {showPrice && amount && currencyCode ? (
+        {!availableForSale ? (
+          <span className="flex-none rounded-full bg-neutral-800 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-300 dark:bg-neutral-900 dark:text-neutral-300">
+            Out of Stock
+          </span>
+        ) : showPrice && amount && currencyCode ? (
           <Price
             className="flex-none rounded-full bg-gold-600 p-2 text-white"
             amount={amount}
