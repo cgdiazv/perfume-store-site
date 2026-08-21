@@ -5,6 +5,8 @@ import MethodStep from './method-step';
 import PaymentStep from './payment-step';
 import ShippingStep from './shipping-step';
 
+import { AvailablePaymentMethod } from 'lib/bigcommerce/payment';
+
 export type ShippingMethodOption = {
   id: string;
   name: string;
@@ -18,6 +20,8 @@ export type CheckoutData = {
   checkoutId: string;
   consignmentId?: string;
   availableShippingMethods?: ShippingMethodOption[];
+  availablePaymentMethods?: AvailablePaymentMethod[];
+  paymentMethodId?: string;
   shippingAddress: any;
   billingAddress: any;
   sameAsShipping: boolean;
@@ -43,6 +47,8 @@ export default function CheckoutMasterForm({
     checkoutId: initialCheckoutId,
     consignmentId: '',
     availableShippingMethods: [],
+    availablePaymentMethods: [],
+    paymentMethodId: '',
     shippingAddress: null,
     billingAddress: null,
     sameAsShipping: true,
