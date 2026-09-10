@@ -26,7 +26,7 @@ export default function PaymentStep({
       : DEFAULT_PAYMENT_METHODS
   );
   const [selectedMethodId, setSelectedMethodId] = useState<string>(
-    formData.paymentMethodId || paymentMethods[0]?.id || 'credit_card'
+    formData.paymentMethodId || paymentMethods[0]?.id || 'authorizenet'
   );
   const [isFetchingMethods, setIsFetchingMethods] = useState<boolean>(false);
 
@@ -67,8 +67,8 @@ export default function PaymentStep({
     paymentMethods.find((m) => m.id === selectedMethodId) ||
     paymentMethods[0] ||
     DEFAULT_PAYMENT_METHODS[0] || {
-      id: 'credit_card',
-      name: 'Credit / Debit Card',
+      id: 'authorizenet',
+      name: 'Authorize.Net',
       type: 'option'
     };
 
