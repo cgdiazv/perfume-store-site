@@ -1,4 +1,5 @@
 import { createBigCommerceOrder } from 'lib/bigcommerce/order';
+import { sendOrderConfirmationEmails } from 'lib/email/order-confirmation';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -26,6 +27,60 @@ export async function POST(req: Request) {
         { error: result.error || 'Failed to place order.' },
         { status: 500 }
       );
+    }
+
+    // Send confirmation emails asynchronously or await to ensure delivery
+    if (result.orderId) {
+      try {
+        const customerEmail =
+          payload.customerEmail ||
+          payload.billingAddress?.email ||
+          payload.shippingAddress?.email;
+        const customerName =
+          `${payload.billingAddress?.firstName || payload.shippingAddress?.firstName || ''} ${
+            payload.billingAddress?.lastName || payload.shippingAddress?.lastName || ''
+          }`.trim() || 'Customer';
+
+        await sendOrderConfirmationEmails(result.orderId, {
+          customerName,
+          customerEmail,
+          paymentMethod: payload.paymentMethodName,
+          orderComments: payload.orderComments,
+          shippingAddress: {
+            name: `${payload.shippingAddress?.firstName || ''} ${
+              payload.shippingAddress?.lastName || ''
+            }`.trim(),
+            street: [payload.shippingAddress?.address1, payload.shippingAddress?.address2]
+              .filter(Boolean)
+              .join(', '),
+            city: payload.shippingAddress?.city || '',
+            state: payload.shippingAddress?.stateOrProvince || '',
+            zip: payload.shippingAddress?.postalCode || '',
+            country: payload.shippingAddress?.countryCode || 'United States'
+          },
+          billingAddress: {
+            name: customerName,
+            street: [
+              payload.billingAddress?.address1 || payload.shippingAddress?.address1,
+              payload.billingAddress?.address2 || payload.shippingAddress?.address2
+            ]
+              .filter(Boolean)
+              .join(', '),
+            city: payload.billingAddress?.city || payload.shippingAddress?.city || '',
+            state:
+              payload.billingAddress?.stateOrProvince ||
+              payload.shippingAddress?.stateOrProvince ||
+              '',
+            zip: payload.billingAddress?.postalCode || payload.shippingAddress?.postalCode || '',
+            country:
+              payload.billingAddress?.countryCode ||
+              payload.shippingAddress?.countryCode ||
+              'United States'
+          }
+        });
+      } catch (emailErr) {
+        console.error('Error sending order confirmation emails:', emailErr);
+      }
     }
 
     return NextResponse.json({
