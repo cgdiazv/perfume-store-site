@@ -62,6 +62,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           initialCheckoutId={cartId}
           showPrices={showPrices}
           savedAddresses={savedAddresses}
+          customerEmail={customer?.email || ''}
+          customerId={customer?.entityId || 0}
         />
       </div>
     </div>

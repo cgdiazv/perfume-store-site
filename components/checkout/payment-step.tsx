@@ -95,7 +95,9 @@ export default function PaymentStep({
     }, 500);
   };
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
+  const [orderError, setOrderError] = useState<string | null>(null);
+
+  const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreedToTerms) {
       alert('Please agree to the Terms and Conditions to proceed.');
@@ -103,14 +105,45 @@ export default function PaymentStep({
     }
 
     setLoading(true);
+    setOrderError(null);
 
-    // Simulate sending transaction payload for chosen BigCommerce payment method
-    setTimeout(async () => {
-      setLoading(false);
+    try {
+      const res = await fetch('/api/checkout/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          checkoutId: formData.checkoutId,
+          customerEmail: formData.customerEmail || formData.shippingAddress?.email || '',
+          customerId: formData.customerId || 0,
+          shippingAddress: formData.shippingAddress,
+          billingAddress: formData.sameAsShipping
+            ? formData.shippingAddress
+            : formData.billingAddress || formData.shippingAddress,
+          shippingMethodId: formData.shippingMethodId,
+          paymentMethodId: selectedMethodId,
+          paymentMethodName: activeMethod.name,
+          orderComments: formData.orderComments,
+          couponCode: formData.couponCode,
+          cardInfo: isCardMethod ? cardInfo : undefined
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to place order in BigCommerce.');
+      }
+
       await clearCart();
-      alert(`Order placed successfully using ${activeMethod.name}! Thank you for your purchase.`);
+      alert(`Order #${data.orderId} placed successfully using ${activeMethod.name}! Thank you for your purchase.`);
       window.location.href = '/search';
-    }, 2000);
+    } catch (err: any) {
+      console.error('Checkout place order error:', err);
+      setOrderError(err.message || 'There was an issue processing your order. Please try again.');
+      alert(`Failed to place order: ${err.message || 'Please check your information and try again.'}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -301,6 +334,12 @@ export default function PaymentStep({
             </span>
           </label>
         </div>
+
+        {orderError && (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-xs font-medium text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+            {orderError}
+          </div>
+        )}
 
         {/* Step Navigation Button Layout Row */}
         <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-6 dark:border-neutral-900">

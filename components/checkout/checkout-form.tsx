@@ -18,6 +18,8 @@ export type ShippingMethodOption = {
 
 export type CheckoutData = {
   checkoutId: string;
+  customerEmail: string;
+  customerId?: number;
   consignmentId?: string;
   availableShippingMethods?: ShippingMethodOption[];
   availablePaymentMethods?: AvailablePaymentMethod[];
@@ -35,16 +37,22 @@ export type CheckoutData = {
 export default function CheckoutMasterForm({
   initialCheckoutId,
   showPrices,
-  savedAddresses = []
+  savedAddresses = [],
+  customerEmail = '',
+  customerId = 0
 }: {
   initialCheckoutId: string;
   showPrices: boolean;
   savedAddresses?: any[];
+  customerEmail?: string;
+  customerId?: number;
 }) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<CheckoutData>({
     checkoutId: initialCheckoutId,
+    customerEmail: customerEmail,
+    customerId: customerId,
     consignmentId: '',
     availableShippingMethods: [],
     availablePaymentMethods: [],

@@ -26,6 +26,7 @@ export default function ShippingStep({
   const [newAddress, setNewAddress] = useState({
     firstName: '',
     lastName: '',
+    email: formData.customerEmail || '',
     phone: '',
     address1: '',
     address2: '',
@@ -44,6 +45,8 @@ export default function ShippingStep({
     setLoading(true);
     setErrorMsg(null);
 
+    const email = targetAddress.email || formData.customerEmail || '';
+
     try {
       if (formData.checkoutId) {
         const res = await fetch('/api/checkout/shipping-rates', {
@@ -51,7 +54,7 @@ export default function ShippingStep({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             checkoutId: formData.checkoutId,
-            shippingAddress: targetAddress
+            shippingAddress: { ...targetAddress, email }
           })
         });
 
@@ -59,7 +62,8 @@ export default function ShippingStep({
         if (res.ok && data.success) {
           setFormData((prev) => ({
             ...prev,
-            shippingAddress: targetAddress,
+            customerEmail: email || prev.customerEmail,
+            shippingAddress: { ...targetAddress, email },
             consignmentId: data.consignmentId,
             availableShippingMethods: data.shippingOptions || []
           }));
@@ -77,7 +81,8 @@ export default function ShippingStep({
     // Fallback if checkoutId is missing or API failed
     setFormData((prev) => ({
       ...prev,
-      shippingAddress: targetAddress
+      customerEmail: email || prev.customerEmail,
+      shippingAddress: { ...targetAddress, email }
     }));
     setLoading(false);
     onNext();
@@ -190,6 +195,20 @@ export default function ShippingStep({
               name="lastName"
               required
               value={newAddress.lastName}
+              onChange={handleInputChange}
+              className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
+            />
+          </div>
+
+          <div className="col-span-full flex flex-col gap-1.5">
+            <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              Email Address *
+            </label>
+            <input
+              type="email"
+              name="email"
+              required
+              value={newAddress.email}
               onChange={handleInputChange}
               className="rounded-md border bg-transparent p-2.5 text-sm text-black dark:text-white dark:border-neutral-800 dark:bg-neutral-900/60"
             />
