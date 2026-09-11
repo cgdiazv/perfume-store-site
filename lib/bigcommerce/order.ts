@@ -75,6 +75,28 @@ export async function createBigCommerceOrder(input: CreateOrderInput): Promise<C
 
   // 1. Attempt V3 Checkout conversion:
   try {
+    // Associate the customer with the checkout BEFORE converting to order.
+    // Carts are always created as guest carts on the storefront, so we must
+    // explicitly link the authenticated customer's account here — otherwise
+    // BigCommerce records the order as customer_id: 0 (guest), making it
+    // invisible in the customer's Order History.
+    if (customerId > 0) {
+      try {
+        await fetch(`${BIGCOMMERCE_API_URL}/stores/${storeHash}/v3/checkouts/${checkoutId}`, {
+          method: 'PUT',
+          headers: {
+            'X-Auth-Token': accessToken,
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({ customer_id: customerId }),
+          cache: 'no-store'
+        });
+      } catch (customerAssocErr) {
+        console.warn('Could not associate customer with checkout:', customerAssocErr);
+      }
+    }
+
     // Add / update billing address on checkout
     const billingPayload = {
       first_name: billingAddress.firstName || shippingAddress.firstName || 'Customer',
@@ -130,7 +152,8 @@ export async function createBigCommerceOrder(input: CreateOrderInput): Promise<C
           body: JSON.stringify({
             status_id: statusId,
             payment_method: paymentMethodName,
-            customer_message: orderComments
+            customer_message: orderComments,
+            ...(customerId > 0 && { customer_id: customerId })
           }),
           cache: 'no-store'
         });

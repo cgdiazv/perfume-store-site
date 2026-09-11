@@ -24,7 +24,7 @@ export const getCustomerQuery = /* GraphQL */ `
           }
         }
       }
-      orders {
+      orders(first: 10) {
         edges {
           node {
             entityId
